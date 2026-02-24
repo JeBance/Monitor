@@ -1,11 +1,11 @@
-import Ajv from 'ajv/dist/2020.js'
+import Ajv from 'ajv'
 import { PluginManifest, WidgetConfig } from '../types'
 import { pluginManifestSchema, widgetConfigSchema } from '../schemas'
 
 // Настройка Ajv без использования eval/new Function для CSP
 const ajv = new Ajv({
   code: { source: false }, // Отключает генерацию кода, использует интерпретатор
-  validateSchema: true,
+  validateSchema: false, // Отключаем валидацию схем (чтобы не требовалась мета-схема)
   allErrors: true,
 })
 
