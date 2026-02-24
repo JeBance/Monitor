@@ -1,16 +1,77 @@
-import Ajv from 'ajv'
 import { PluginManifest, WidgetConfig } from '../types'
 import { pluginManifestSchema, widgetConfigSchema } from '../schemas'
 
-// Настройка Ajv для работы с CSP (полностью без eval/new Function)
-const ajv = new Ajv({
-  code: { source: false, esm: false }, // Полностью отключаем генерацию кода
-  validateSchema: false,
-  allErrors: true,
-})
+// Простая валидация JSON Schema без Ajv (для CSP совместимости)
+// Ajv генерирует код через new Function, что нарушает CSP
 
-const validateManifest = ajv.compile<PluginManifest>(pluginManifestSchema)
-const validateConfig = ajv.compile<WidgetConfig>(widgetConfigSchema)
+function validateSchema(data: any, schema: any): { valid: boolean; errors?: any[] } {
+  // Базовая валидация типов
+  if (schema.type === 'object' && typeof data !== 'object') {
+    return { valid: false, errors: [{ message: 'must be object' }] }
+  }
+  if (schema.type === 'array' && !Array.isArray(data)) {
+    return { valid: false, errors: [{ message: 'must be array' }] }
+  }
+  if (schema.type === 'string' && typeof data !== 'string') {
+    return { valid: false, errors: [{ message: 'must be string' }] }
+  }
+  if (schema.type === 'number' && typeof data !== 'number') {
+    return { valid: false, errors: [{ message: 'must be number' }] }
+  }
+  if (schema.type === 'boolean' && typeof data !== 'boolean') {
+    return { valid: false, errors: [{ message: 'must be boolean' }] }
+  }
+  
+  // Проверка required
+  if (schema.required && Array.isArray(schema.required)) {
+    for (const prop of schema.required) {
+      if (!(prop in data)) {
+        return { valid: false, errors: [{ message: `missing required: ${prop}` }] }
+      }
+    }
+  }
+  
+  // Проверка enum
+  if (schema.enum && !schema.enum.includes(data)) {
+    return { valid: false, errors: [{ message: 'must be one of enum values' }] }
+  }
+  
+  // Проверка pattern
+  if (schema.pattern && typeof data === 'string') {
+    const regex = new RegExp(schema.pattern)
+    if (!regex.test(data)) {
+      return { valid: false, errors: [{ message: `must match pattern: ${schema.pattern}` }] }
+    }
+  }
+  
+  // Рекурсивная проверка свойств объекта
+  if (schema.type === 'object' && schema.properties) {
+    for (const [key, propSchema] of Object.entries(schema.properties)) {
+      if (key in data) {
+        const result = validateSchema(data[key], propSchema)
+        if (!result.valid) return result
+      }
+    }
+  }
+  
+  // Проверка элементов массива
+  if (schema.type === 'array' && schema.items) {
+    for (const item of data) {
+      const result = validateSchema(item, schema.items)
+      if (!result.valid) return result
+    }
+  }
+  
+  return { valid: true }
+}
+
+export function validateManifest(manifest: PluginManifest): { valid: boolean; errors?: any[] } {
+  return validateSchema(manifest, pluginManifestSchema)
+}
+
+export function validateConfig(config: WidgetConfig): { valid: boolean; errors?: any[] } {
+  return validateSchema(config, widgetConfigSchema)
+}
 
 export class PluginError extends Error {
   constructor(message: string) {
@@ -26,10 +87,10 @@ export async function loadPluginManifest(url: string): Promise<PluginManifest> {
       throw new PluginError(`Failed to fetch manifest: ${response.statusText}`)
     }
     const manifest = await response.json()
-    
-    const valid = validateManifest(manifest)
-    if (!valid) {
-      throw new PluginError(`Invalid manifest: ${JSON.stringify(validateManifest.errors)}`)
+
+    const validation = validateManifest(manifest)
+    if (!validation.valid) {
+      throw new PluginError(`Invalid manifest: ${JSON.stringify(validation.errors)}`)
     }
     
     // Проверка URL на HTTPS
@@ -61,10 +122,10 @@ export async function loadWidgetConfig(configUrl: string, baseUrl: string): Prom
       throw new PluginError(`Failed to fetch config: ${response.statusText}`)
     }
     const config = await response.json()
-    
-    const valid = validateConfig(config)
-    if (!valid) {
-      throw new PluginError(`Invalid config: ${JSON.stringify(validateConfig.errors)}`)
+
+    const validation = validateConfig(config)
+    if (!validation.valid) {
+      throw new PluginError(`Invalid config: ${JSON.stringify(validation.errors)}`)
     }
     
     return config
