@@ -1,0 +1,25 @@
+{
+  "id": "exchange-rates",
+  "name": "Exchange Rates",
+  "version": "1.0.0",
+  "description": "Currency exchange rates from various sources",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "currency-converter",
+      "name": "Currency Converter",
+      "description": "Convert between currencies",
+      "icon": "",
+      "configUrl": "widgets/currency-converter/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "rates-table",
+      "name": "Rates Table",
+      "description": "Exchange rates for multiple currencies",
+      "icon": "",
+      "configUrl": "widgets/rates-table/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

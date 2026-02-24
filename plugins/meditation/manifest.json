@@ -1,0 +1,33 @@
+{
+  "id": "meditation",
+  "name": "Meditation & Mindfulness",
+  "version": "1.0.0",
+  "description": "Meditation timers and mindfulness exercises",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "breathing-exercise",
+      "name": "Breathing Exercise",
+      "description": "Guided breathing timer",
+      "icon": "",
+      "configUrl": "widgets/breathing-exercise/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "meditation-timer",
+      "name": "Meditation Timer",
+      "description": "Customizable meditation timer",
+      "icon": "",
+      "configUrl": "widgets/meditation-timer/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "mindful-quote",
+      "name": "Mindful Quote",
+      "description": "Daily mindfulness inspiration",
+      "icon": "",
+      "configUrl": "widgets/mindful-quote/config.json",
+      "sizes": ["small"]
+    }
+  ]
+}

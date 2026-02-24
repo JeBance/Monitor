@@ -1,0 +1,25 @@
+{
+  "id": "crypto-prices",
+  "name": "Crypto Prices",
+  "version": "1.0.0",
+  "description": "Cryptocurrency prices from CoinGecko API",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "bitcoin-price",
+      "name": "Bitcoin Price",
+      "description": "Current Bitcoin price in USD",
+      "icon": "",
+      "configUrl": "widgets/bitcoin-price/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "crypto-table",
+      "name": "Crypto Table",
+      "description": "Top cryptocurrencies by market cap",
+      "icon": "",
+      "configUrl": "widgets/crypto-table/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

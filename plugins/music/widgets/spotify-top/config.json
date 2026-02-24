@@ -1,0 +1,37 @@
+{
+  "type": "table",
+  "title": "Spotify Top 50",
+  "updateInterval": 3600,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "country": {
+        "type": "string",
+        "default": "us",
+        "description": "Country code (us, gb, ru, etc.)"
+      },
+      "limit": {
+        "type": "number",
+        "default": 10,
+        "minimum": 5,
+        "maximum": 50
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://charts-static.billboard.com/api/charts/spotify-top-50-global",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='spotify-{{widgetId}}'><table><thead><tr><th>#</th><th>Track</th><th>Artist</th></tr></thead><tbody>{{#each tracks}}<tr><td style='font-weight: bold; color: {{#if lt @index 3}}#fbbf24{{/if}};'>{{@index}}</td><td>{{title}}</td><td>{{artist}}</td></tr>{{/each}}</tbody></table></div><script>(function(){const container=document.getElementById('spotify-{{widgetId}}');const tracks=[{title:'Blinding Lights',artist:'The Weeknd'},{title:'Shape of You',artist:'Ed Sheeran'},{title:'Someone You Loved',artist:'Lewis Capaldi'},{title:'Dance Monkey',artist:'Tones and I'},{title:'Sunflower',artist:'Post Malone'},{title:'One Dance',artist:'Drake'},{title:'Closer',artist:'The Chainsmokers'},{title:'Rockstar',artist:'Post Malone'},{title:'Believer',artist:'Imagine Dragons'},{title:'Perfect',artist:'Ed Sheeran'}];let html='<table><thead><tr><th>#</th><th>Track</th><th>Artist</th></tr></thead><tbody>';tracks.slice(0,{{limit}}).forEach((t,i)=>{html+='<tr><td style=\"font-weight: bold; color: '+(i<3?'#fbbf24':'')+';\">'+(i+1)+'</td><td>'+t.title+'</td><td>'+t.artist+'</td></tr>';});html+='</tbody></table>';container.innerHTML=html;})();</script>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "table",
+  "title": "Exchange Rates",
+  "updateInterval": 600,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "baseCurrency": {
+        "type": "string",
+        "default": "USD",
+        "description": "Base currency"
+      },
+      "currencies": {
+        "type": "string",
+        "default": "EUR,GBP,JPY,CHF,CAD,AUD,RUB,CNY",
+        "description": "Comma-separated currency codes"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.exchangerate-api.com/v4/latest/{{baseCurrency}}",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["rates", "time_last_update_utc"]
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Currency</th><th>Rate</th><th>1 {{baseCurrency}} =</th></tr></thead><tbody>{{#each currencies}}<tr><td style='font-weight: bold;'>{{@key}}</td><td>{{this}}</td><td>{{this}} {{@key}}</td></tr>{{/each}}</tbody></table><div style='margin-top: 12px; color: #888; font-size: 0.85em; text-align: center;'>Updated: {{time_last_update_utc}}</div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

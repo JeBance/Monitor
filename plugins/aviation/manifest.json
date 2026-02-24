@@ -1,0 +1,33 @@
+{
+  "id": "aviation",
+  "name": "Aviation",
+  "version": "1.0.0",
+  "description": "Flight tracking and aviation data",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "metar",
+      "name": "METAR Weather",
+      "description": "Aviation weather reports",
+      "icon": "",
+      "configUrl": "widgets/metar/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "flight-status",
+      "name": "Flight Status",
+      "description": "Real-time flight tracking",
+      "icon": "",
+      "configUrl": "widgets/flight-status/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "airspace-status",
+      "name": "Airspace Status",
+      "description": "NOTAM and airspace information",
+      "icon": "",
+      "configUrl": "widgets/airspace-status/config.json",
+      "sizes": ["medium"]
+    }
+  ]
+}

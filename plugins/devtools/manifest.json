@@ -1,0 +1,41 @@
+{
+  "id": "developer-tools",
+  "name": "Developer Tools",
+  "version": "1.0.0",
+  "description": "Tools and resources for developers",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "npm-downloads",
+      "name": "NPM Downloads",
+      "description": "NPM package download statistics",
+      "icon": "",
+      "configUrl": "widgets/npm-downloads/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "package-version",
+      "name": "Package Version",
+      "description": "Latest NPM package version",
+      "icon": "",
+      "configUrl": "widgets/package-version/config.json",
+      "sizes": ["small"]
+    },
+    {
+      "id": "dev-xkcd",
+      "name": "XKCD Comic",
+      "description": "Daily XKCD comic for developers",
+      "icon": "",
+      "configUrl": "widgets/dev-xkcd/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "stackoverflow-questions",
+      "name": "Stack Overflow",
+      "description": "Hot questions from Stack Overflow",
+      "icon": "",
+      "configUrl": "widgets/stackoverflow-questions/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "hr-recruitment",
+  "name": "HR & Recruitment",
+  "version": "1.0.0",
+  "description": "Human resources and hiring tools",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "applicant-tracker",
+      "name": "Applicant Tracker",
+      "description": "Job application pipeline",
+      "icon": "",
+      "configUrl": "widgets/applicant-tracker/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "employee-birthday",
+      "name": "Employee Birthdays",
+      "description": "Team birthday reminders",
+      "icon": "",
+      "configUrl": "widgets/employee-birthday/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "pto-tracker",
+      "name": "PTO Tracker",
+      "description": "Vacation and time-off balance",
+      "icon": "",
+      "configUrl": "widgets/pto-tracker/config.json",
+      "sizes": ["medium"]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "type": "table",
+  "title": "Daily Deals",
+  "updateInterval": 600,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "category": {
+        "type": "string",
+        "enum": ["all", "electronics", "home", "fashion", "sports"],
+        "default": "all",
+        "description": "Deal category"
+      },
+      "limit": {
+        "type": "number",
+        "default": 10,
+        "minimum": 5,
+        "maximum": 20
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.deals.com/v1/daily?category={{category}}&limit={{limit}}",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Product</th><th>Discount</th><th>Price</th></tr></thead><tbody><tr><td><a href='#' style='color: #60a5fa;'>Wireless Earbuds Pro</a></td><td style='color: #22c55e; font-weight: bold;'>-40%</td><td>$59.99</td></tr><tr><td><a href='#' style='color: #60a5fa;'>Smart Watch Series 8</a></td><td style='color: #22c55e; font-weight: bold;'>-25%</td><td>$299.99</td></tr><tr><td><a href='#' style='color: #60a5fa;'>4K Monitor 27\"</a></td><td style='color: #22c55e; font-weight: bold;'>-30%</td><td>$349.99</td></tr><tr><td><a href='#' style='color: #60a5fa;'>Mechanical Keyboard</a></td><td style='color: #22c55e; font-weight: bold;'>-35%</td><td>$89.99</td></tr><tr><td><a href='#' style='color: #60a5fa;'>Gaming Mouse RGB</a></td><td style='color: #22c55e; font-weight: bold;'>-45%</td><td>$44.99</td></tr></tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

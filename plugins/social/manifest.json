@@ -1,0 +1,33 @@
+{
+  "id": "social-media",
+  "name": "Social Media",
+  "version": "1.0.0",
+  "description": "Social media statistics and feeds",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "reddit-posts",
+      "name": "Reddit Posts",
+      "description": "Hot posts from any subreddit",
+      "icon": "",
+      "configUrl": "widgets/reddit-posts/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "youtube-stats",
+      "name": "YouTube Stats",
+      "description": "YouTube channel statistics",
+      "icon": "",
+      "configUrl": "widgets/youtube-stats/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "product-hunt",
+      "name": "Product Hunt",
+      "description": "Top products of the day",
+      "icon": "",
+      "configUrl": "widgets/product-hunt/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

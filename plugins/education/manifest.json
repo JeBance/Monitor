@@ -1,0 +1,33 @@
+{
+  "id": "education",
+  "name": "Education",
+  "version": "1.0.0",
+  "description": "Learning and knowledge widgets",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "word-day",
+      "name": "Word of the Day",
+      "description": "Learn a new word daily",
+      "icon": "",
+      "configUrl": "widgets/word-day/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "trivia",
+      "name": "Trivia Quiz",
+      "description": "Random trivia questions",
+      "icon": "",
+      "configUrl": "widgets/trivia/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "wiki-article",
+      "name": "Wiki Article",
+      "description": "Featured Wikipedia article",
+      "icon": "",
+      "configUrl": "widgets/wiki-article/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

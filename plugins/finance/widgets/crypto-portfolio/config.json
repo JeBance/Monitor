@@ -1,0 +1,31 @@
+{
+  "type": "table",
+  "title": "Crypto Portfolio",
+  "updateInterval": 120,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "holdings": {
+        "type": "string",
+        "default": "bitcoin:1,ethereum:5,solana:100",
+        "description": "Holdings as coin:amount pairs"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,cardano,polkadot,dogecoin&vs_currencies=usd&include_24hr_change=true",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='portfolio-{{widgetId}}'><table><thead><tr><th>Asset</th><th>Holdings</th><th>Price</th><th>Value</th><th>24h</th></tr></thead><tbody></tbody></table></div><script>(function(){const holdings='{{holdings}}'.split(',');const prices={bitcoin:{price:42000,change:2.5},ethereum:{price:2200,change:-1.2},solana:{price:95,change:5.3},cardano:{price:0.52,change:0.8},polkadot:{price:7.5,change:-2.1},dogecoin:{price:0.08,change:1.5}};let total=0;let html='<tbody>';holdings.forEach(h=>{const [coin,amount]=h.split(':');const p=prices[coin]||{price:0,change:0};const value=p.price*amount;total+=value;html+='<tr><td style=\"text-transform:capitalize;\">'+coin+'</td><td>'+amount+'</td><td>$'+p.price.toLocaleString()+'</td><td style=\"font-weight:bold;\">$'+value.toLocaleString(undefined,{maximumFractionDigits:2})+'</td><td style=\"color:'+(p.change>=0?'#22c55e':'#ef4444')+';\">'+(p.change>=0?'+':'')+p.change+'%</td></tr>';});html+='<tr style=\"border-top:2px solid #333;\"><td colspan=\"3\" style=\"font-weight:bold;\">Total</td><td colspan=\"2\" style=\"font-weight:bold;font-size:1.2em;\">$'+total.toLocaleString(undefined,{maximumFractionDigits:2})+'</td></tr>';html+='</tbody>';document.getElementById('portfolio-{{widgetId}}').querySelector('table').innerHTML=html;})();</script>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

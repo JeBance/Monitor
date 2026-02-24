@@ -1,0 +1,33 @@
+{
+  "id": "finance",
+  "name": "Finance",
+  "version": "1.0.0",
+  "description": "Personal finance and crypto tracking",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "crypto-portfolio",
+      "name": "Crypto Portfolio",
+      "description": "Track your crypto holdings",
+      "icon": "",
+      "configUrl": "widgets/crypto-portfolio/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "gas-prices",
+      "name": "Gas Prices",
+      "description": "Current fuel prices",
+      "icon": "",
+      "configUrl": "widgets/gas-prices/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "gold-price",
+      "name": "Gold Price",
+      "description": "Precious metals prices",
+      "icon": "",
+      "configUrl": "widgets/gold-price/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

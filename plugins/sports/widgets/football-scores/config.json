@@ -1,0 +1,35 @@
+{
+  "type": "table",
+  "title": "Football Scores",
+  "updateInterval": 120,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "league": {
+        "type": "string",
+        "enum": ["PL", "PD", "SA", "BL1", "FL1", "CL"],
+        "default": "PL",
+        "description": "League code (PL=Premier League, CL=Champions League)"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.football-data.org/v4/competitions/{{league}}/matches?status=SCHEDULED,LIVE,FINISHED&matchday=1",
+    "method": "GET",
+    "headers": {
+      "X-Auth-Token": "{{apiKey}}"
+    },
+    "transform": {
+      "type": "pick",
+      "fields": ["matches"]
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Home</th><th>Score</th><th>Away</th></tr></thead><tbody>{{#each matches}}<tr><td>{{homeTeam.name}}</td><td style='font-weight: bold; color: {{#if eq status \"FINISHED\"}}#e0e0e0{{else}}#fbbf24{{/if}};'>{{#if eq status \"FINISHED\"}}{{score.fullTime.home}} - {{score.fullTime.away}}{{else}}{{#if eq status \"LIVE\"}}LIVE{{else}}{{utcDate}}{{/if}}{{/if}}</td><td>{{awayTeam.name}}</td></tr>{{/each}}</tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

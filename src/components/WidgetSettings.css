@@ -1,0 +1,155 @@
+.widget-settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.widget-settings {
+  background: #1e1e2e;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.widget-settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #333;
+}
+
+.widget-settings-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.btn-close:hover {
+  background: #333;
+  color: #e0e0e0;
+}
+
+.widget-settings-content {
+  padding: 20px;
+}
+
+.widget-settings-content h3 {
+  font-size: 1rem;
+  margin-bottom: 16px;
+  color: #aaa;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: #e0e0e0;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  background: #252540;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-size: 0.9rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+.form-group input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.no-settings {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.widget-settings-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-top: 1px solid #333;
+  gap: 12px;
+}
+
+.widget-settings-footer button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.widget-settings-footer .btn-primary {
+  background: #4f46e5;
+  color: white;
+  flex: 1;
+}
+
+.widget-settings-footer .btn-primary:hover {
+  background: #4338ca;
+}
+
+.widget-settings-footer .btn-primary:disabled {
+  background: #6366f1;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.widget-settings-footer .btn-secondary {
+  background: #374151;
+  color: white;
+}
+
+.widget-settings-footer .btn-secondary:hover {
+  background: #4b5563;
+}
+
+.widget-settings-footer .btn-danger {
+  background: #dc2626;
+  color: white;
+}
+
+.widget-settings-footer .btn-danger:hover {
+  background: #b91c1c;
+}

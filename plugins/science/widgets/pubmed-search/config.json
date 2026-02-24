@@ -1,0 +1,37 @@
+{
+  "type": "table",
+  "title": "PubMed Research",
+  "updateInterval": 3600,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "default": "cancer immunotherapy",
+        "description": "Search query"
+      },
+      "limit": {
+        "type": "number",
+        "default": 10,
+        "minimum": 5,
+        "maximum": 20
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term={{query}}&retmax={{limit}}&retmode=json",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["ids"]
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>PMID</th><th>Title</th></tr></thead><tbody><tr><td style='color: #888;'>38012345</td><td><a href='https://pubmed.ncbi.nlm.nih.gov/38012345/' target='_blank' style='color: #60a5fa;'>Advances in CAR-T Cell Therapy for Solid Tumors</a></td></tr><tr><td style='color: #888;'>38012344</td><td><a href='https://pubmed.ncbi.nlm.nih.gov/38012344/' target='_blank' style='color: #60a5fa;'>Checkpoint Inhibitors in Lung Cancer: A Review</a></td></tr><tr><td style='color: #888;'>38012343</td><td><a href='https://pubmed.ncbi.nlm.nih.gov/38012343/' target='_blank' style='color: #60a5fa;'>Bispecific Antibodies for Hematologic Malignancies</a></td></tr><tr><td style='color: #888;'>38012342</td><td><a href='https://pubmed.ncbi.nlm.nih.gov/38012342/' target='_blank' style='color: #60a5fa;'>Tumor Microenvironment and Immune Response</a></td></tr><tr><td style='color: #888;'>38012341</td><td><a href='https://pubmed.ncbi.nlm.nih.gov/38012341/' target='_blank' style='color: #60a5fa;'>Neoantigen Vaccines in Cancer Treatment</a></td></tr></tbody></table><div style='margin-top: 8px; font-size: 0.75em; color: #666; text-align: center;'>Source: PubMed/NCBI</div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

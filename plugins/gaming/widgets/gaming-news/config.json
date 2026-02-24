@@ -1,0 +1,38 @@
+{
+  "type": "table",
+  "title": "Gaming News",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "source": {
+        "type": "string",
+        "enum": ["ign", "kotaku", "polygon", "gamespot", "pcgamer"],
+        "default": "ign",
+        "description": "News source"
+      },
+      "limit": {
+        "type": "number",
+        "default": 10,
+        "minimum": 5,
+        "maximum": 20
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://feeds.feedburner.com/ign/games-all",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='gaming-news-{{widgetId}}'><table><thead><tr><th>Headline</th><th>Time</th></tr></thead><tbody><tr><td><a href='#' style='color: #60a5fa;'>New Zelda Game Announced</a></td><td style='color: #888; white-space: nowrap;'>2h ago</td></tr><tr><td><a href='#' style='color: #60a5fa;'>GTA VI Release Date Revealed</a></td><td style='color: #888; white-space: nowrap;'>4h ago</td></tr><tr><td><a href='#' style='color: #60a5fa;'>PlayStation 5 Pro Specs Leaked</a></td><td style='color: #888; white-space: nowrap;'>6h ago</td></tr><tr><td><a href='#' style='color: #60a5fa;'>Steam Deck 2 Coming Soon</a></td><td style='color: #888; white-space: nowrap;'>8h ago</td></tr><tr><td><a href='#' style='color: #60a5fa;'>Xbox Game Pass New Titles</a></td><td style='color: #888; white-space: nowrap;'>12h ago</td></tr></tbody></table></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

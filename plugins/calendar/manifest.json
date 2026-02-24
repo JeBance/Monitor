@@ -1,0 +1,33 @@
+{
+  "id": "calendar-time",
+  "name": "Calendar & Time",
+  "version": "1.0.0",
+  "description": "Clock, date, and calendar widgets",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "digital-clock",
+      "name": "Digital Clock",
+      "description": "Large digital clock with seconds",
+      "icon": "",
+      "configUrl": "widgets/digital-clock/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "world-clock",
+      "name": "World Clock",
+      "description": "Time in multiple timezones",
+      "icon": "",
+      "configUrl": "widgets/world-clock/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "date-display",
+      "name": "Date Display",
+      "description": "Current date with day of week",
+      "icon": "",
+      "configUrl": "widgets/date-display/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "news-feed",
+  "name": "News Feed",
+  "version": "1.0.0",
+  "description": "News from various sources via RSS/JSON APIs",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "hacker-news",
+      "name": "Hacker News",
+      "description": "Top stories from Hacker News",
+      "icon": "",
+      "configUrl": "widgets/hacker-news/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "tech-news",
+      "name": "Tech News",
+      "description": "Technology news headlines",
+      "icon": "",
+      "configUrl": "widgets/tech-news/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

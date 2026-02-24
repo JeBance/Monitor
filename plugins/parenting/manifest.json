@@ -1,0 +1,41 @@
+{
+  "id": "parenting",
+  "name": "Parenting & Family",
+  "version": "1.0.0",
+  "description": "Parenting tips and family organization",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "chore-chart",
+      "name": "Chore Chart",
+      "description": "Kids chore tracking",
+      "icon": "",
+      "configUrl": "widgets/chore-chart/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "baby-schedule",
+      "name": "Baby Schedule",
+      "description": "Baby feeding and sleep tracker",
+      "icon": "",
+      "configUrl": "widgets/baby-schedule/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "family-calendar",
+      "name": "Family Calendar",
+      "description": "Shared family events",
+      "icon": "",
+      "configUrl": "widgets/family-calendar/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "activity-ideas",
+      "name": "Activity Ideas",
+      "description": "Kids activity suggestions",
+      "icon": "",
+      "configUrl": "widgets/activity-ideas/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "weather-pro",
+  "name": "Weather Pro",
+  "version": "1.0.0",
+  "description": "Advanced weather monitoring",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "radar-map",
+      "name": "Radar Map",
+      "description": "Live weather radar",
+      "icon": "",
+      "configUrl": "widgets/radar-map/config.json",
+      "sizes": ["large"]
+    },
+    {
+      "id": "uv-index",
+      "name": "UV Index",
+      "description": "UV radiation forecast",
+      "icon": "",
+      "configUrl": "widgets/uv-index/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "pollen-count",
+      "name": "Pollen Count",
+      "description": "Allergen forecast",
+      "icon": "",
+      "configUrl": "widgets/pollen-count/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "storm-tracker",
+      "name": "Storm Tracker",
+      "description": "Hurricane and storm tracking",
+      "icon": "",
+      "configUrl": "widgets/storm-tracker/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

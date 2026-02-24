@@ -1,0 +1,33 @@
+{
+  "id": "events",
+  "name": "Events & Planning",
+  "version": "1.0.0",
+  "description": "Event planning and countdown widgets",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "countdown",
+      "name": "Countdown",
+      "description": "Countdown to important events",
+      "icon": "",
+      "configUrl": "widgets/countdown/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "birthday-tracker",
+      "name": "Birthday Tracker",
+      "description": "Track birthdays and anniversaries",
+      "icon": "",
+      "configUrl": "widgets/birthday-tracker/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "event-calendar",
+      "name": "Event Calendar",
+      "description": "Upcoming events overview",
+      "icon": "",
+      "configUrl": "widgets/event-calendar/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

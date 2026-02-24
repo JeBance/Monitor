@@ -1,0 +1,41 @@
+{
+  "id": "gardening",
+  "name": "Gardening",
+  "version": "1.0.0",
+  "description": "Garden planning and plant care",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "plant-care",
+      "name": "Plant Care",
+      "description": "Watering and care reminders",
+      "icon": "",
+      "configUrl": "widgets/plant-care/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "garden-weather",
+      "name": "Garden Weather",
+      "description": "Weather for gardening activities",
+      "icon": "",
+      "configUrl": "widgets/garden-weather/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "plant-database",
+      "name": "Plant Database",
+      "description": "Plant information and care tips",
+      "icon": "",
+      "configUrl": "widgets/plant-database/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "moon-phases",
+      "name": "Moon Phases",
+      "description": "Lunar calendar for gardening",
+      "icon": "",
+      "configUrl": "widgets/moon-phases/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

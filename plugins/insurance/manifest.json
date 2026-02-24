@@ -1,0 +1,33 @@
+{
+  "id": "insurance",
+  "name": "Insurance",
+  "version": "1.0.0",
+  "description": "Insurance policies and claims tracking",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "policy-tracker",
+      "name": "Policy Tracker",
+      "description": "Insurance policy overview",
+      "icon": "",
+      "configUrl": "widgets/policy-tracker/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "claims-status",
+      "name": "Claims Status",
+      "description": "Track insurance claims",
+      "icon": "",
+      "configUrl": "widgets/claims-status/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "premium-reminder",
+      "name": "Premium Reminder",
+      "description": "Payment due dates",
+      "icon": "",
+      "configUrl": "widgets/premium-reminder/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

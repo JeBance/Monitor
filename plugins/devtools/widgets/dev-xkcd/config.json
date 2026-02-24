@@ -1,0 +1,31 @@
+{
+  "type": "text",
+  "title": "XKCD Comic",
+  "updateInterval": 86400,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "random": {
+        "type": "boolean",
+        "default": false,
+        "description": "Show random comic instead of latest"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://xkcd.com/info.0.json",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["num", "title", "img", "alt", "year", "month", "day"]
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center; padding: 8px;'><div style='font-size: 0.9em; color: #888; margin-bottom: 8px;'>#{{num}} - {{title}}</div><img src='{{img}}' alt='{{title}}' style='max-width: 100%; height: auto; border-radius: 8px;' /><div style='color: #aaa; font-size: 0.85em; margin-top: 12px; font-style: italic;'>{{alt}}</div><div style='color: #666; font-size: 0.75em; margin-top: 8px;'>{{year}}-{{month}}-{{day}}</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

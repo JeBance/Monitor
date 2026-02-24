@@ -1,0 +1,32 @@
+{
+  "type": "text",
+  "title": "Random Fact",
+  "updateInterval": 0,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "category": {
+        "type": "string",
+        "enum": ["any", "nature", "science", "history", "geography"],
+        "default": "any",
+        "description": "Fact category"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://uselessfacts.jsph.pl/random.json?language=en",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["text"]
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center; padding: 16px;'><div style='font-size: 3em; margin-bottom: 12px;'>🧠</div><div style='font-size: 1.1em; line-height: 1.6; color: #e0e0e0;'>{{text}}</div><div style='margin-top: 16px; color: #888; font-size: 0.9em;'>💡 Learn something new!</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

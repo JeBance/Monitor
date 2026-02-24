@@ -1,0 +1,37 @@
+{
+  "type": "text",
+  "title": "{{owner}}/{{repo}}",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "owner": {
+        "type": "string",
+        "default": "facebook",
+        "description": "Repository owner"
+      },
+      "repo": {
+        "type": "string",
+        "default": "react",
+        "description": "Repository name"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.github.com/repos/{{owner}}/{{repo}}",
+    "method": "GET",
+    "headers": {},
+    "transform": {
+      "type": "pick",
+      "fields": ["stargazers_count", "forks_count", "open_issues_count", "subscribers_count", "language", "updated_at"]
+    }
+  },
+  "template": {
+    "html": "<div style='display: grid; grid-template-columns: 1fr 1fr; gap: 12px;'><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #fbbf24;'>{{stargazers_count}}</div><div style='color: #888; font-size: 0.85em;'>Stars</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #60a5fa;'>{{forks_count}}</div><div style='color: #888; font-size: 0.85em;'>Forks</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #f87171;'>{{open_issues_count}}</div><div style='color: #888; font-size: 0.85em;'>Issues</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #34d399;'>{{subscribers_count}}</div><div style='color: #888; font-size: 0.85em;'>Watchers</div></div></div><div style='margin-top: 16px; color: #aaa; font-size: 0.9em;'><span style='color: #fbbf24;'>●</span> {{language}} &bull; Updated {{updated_at}}</div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

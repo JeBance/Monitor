@@ -1,0 +1,25 @@
+{
+  "id": "ip-info",
+  "name": "IP Information",
+  "version": "1.0.0",
+  "description": "IP address and geolocation information",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "my-ip",
+      "name": "My IP",
+      "description": "Your public IP address and location",
+      "icon": "",
+      "configUrl": "widgets/my-ip/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "ip-lookup",
+      "name": "IP Lookup",
+      "description": "Lookup information for any IP address",
+      "icon": "",
+      "configUrl": "widgets/ip-lookup/config.json",
+      "sizes": ["medium"]
+    }
+  ]
+}

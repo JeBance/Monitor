@@ -1,0 +1,37 @@
+{
+  "type": "table",
+  "title": "r/{{subreddit}}",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "subreddit": {
+        "type": "string",
+        "default": "technology",
+        "description": "Subreddit name"
+      },
+      "limit": {
+        "type": "number",
+        "default": 10,
+        "minimum": 5,
+        "maximum": 25
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://www.reddit.com/r/{{subreddit}}/hot.json?limit={{limit}}",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$.data.children[*].data"
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Title</th><th>Score</th><th>Comments</th></tr></thead><tbody>{{#each this}}<tr><td><a href='https://reddit.com{{permalink}}' target='_blank' style='color: #60a5fa;'>{{title}}</a></td><td style='color: #f97316;'>{{ups}}</td><td>{{num_comments}}</td></tr>{{/each}}</tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "type": "indicator",
+  "title": "{{symbol}} Quote",
+  "updateInterval": 60,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "symbol": {
+        "type": "string",
+        "default": "AAPL",
+        "description": "Stock symbol (e.g., AAPL, GOOGL, TSLA)"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/{{symbol}}?range=1d&interval=1m",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$.chart.result[0].meta"
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='font-size: 2.5em; font-weight: bold; color: {{#if gte regularMarketPrice previousClose}}#22c55e{{else}}#ef4444{{/if}};'>${{regularMarketPrice}}</div><div style='margin-top: 8px; font-size: 1.1em;'><span style='color: {{#if gte regularMarketChange 0}}#22c55e{{else}}#ef4444{{/if}};'>{{regularMarketChange}} ({{regularMarketChangePercent}}%)</span></div><div style='margin-top: 12px; color: #888; font-size: 0.85em;'>{{shortName}}</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

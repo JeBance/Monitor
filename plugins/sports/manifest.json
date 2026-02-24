@@ -1,0 +1,25 @@
+{
+  "id": "sports",
+  "name": "Sports",
+  "version": "1.0.0",
+  "description": "Sports scores and standings",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "football-scores",
+      "name": "Football Scores",
+      "description": "Live football scores",
+      "icon": "",
+      "configUrl": "widgets/football-scores/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "f1-standings",
+      "name": "F1 Standings",
+      "description": "Formula 1 driver standings",
+      "icon": "",
+      "configUrl": "widgets/f1-standings/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

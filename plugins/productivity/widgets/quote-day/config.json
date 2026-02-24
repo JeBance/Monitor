@@ -1,0 +1,32 @@
+{
+  "type": "text",
+  "title": "Quote of the Day",
+  "updateInterval": 86400,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "category": {
+        "type": "string",
+        "enum": ["inspire", "management", "life", "funny", "love", "art", "students"],
+        "default": "inspire",
+        "description": "Quote category"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://quotable.io/random?tag={{category}}",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["content", "author", "tags"]
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center; padding: 20px;'><div style='font-size: 1.3em; font-style: italic; color: #e0e0e0; line-height: 1.6;'>\"{{content}}\"</div><div style='margin-top: 16px; color: #888; font-size: 1em;'>— {{author}}</div><div style='margin-top: 12px;'><span style='background: #252540; color: #888; padding: 4px 12px; border-radius: 12px; font-size: 0.75em;'>#{{tags.0}}</span></div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

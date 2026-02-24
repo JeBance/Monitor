@@ -1,0 +1,35 @@
+{
+  "type": "text",
+  "title": "Gas Prices",
+  "updateInterval": 86400,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "region": {
+        "type": "string",
+        "default": "US",
+        "enum": ["US", "CA", "UK", "DE", "AU"],
+        "description": "Region for gas prices"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.api-ninjas.com/v1/gasprice?country={{region}}",
+    "method": "GET",
+    "headers": {
+      "X-Api-Key": "{{apiKey}}"
+    },
+    "transform": {
+      "type": "pick",
+      "fields": ["regular", "midgrade", "premium", "diesel"]
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='display: grid; grid-template-columns: 1fr 1fr; gap: 12px;'><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 0.8em; color: #888;'>Regular</div><div style='font-size: 1.5em; font-weight: bold; color: #22c55e;'>${{regular}}</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 0.8em; color: #888;'>Midgrade</div><div style='font-size: 1.5em; font-weight: bold; color: #60a5fa;'>${{midgrade}}</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 0.8em; color: #888;'>Premium</div><div style='font-size: 1.5em; font-weight: bold; color: #fbbf24;'>${{premium}}</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 0.8em; color: #888;'>Diesel</div><div style='font-size: 1.5em; font-weight: bold; color: #f97316;'>${{diesel}}</div></div></div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

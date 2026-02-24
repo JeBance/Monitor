@@ -1,0 +1,41 @@
+{
+  "id": "science",
+  "name": "Science & Space",
+  "version": "1.0.0",
+  "description": "Scientific data and space exploration",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "apod",
+      "name": "Astronomy Picture",
+      "description": "NASA Astronomy Picture of the Day",
+      "icon": "",
+      "configUrl": "widgets/apod/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "iss-location",
+      "name": "ISS Location",
+      "description": "Track the International Space Station",
+      "icon": "",
+      "configUrl": "widgets/iss-location/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "mars-weather",
+      "name": "Mars Weather",
+      "description": "Weather report from Mars",
+      "icon": "",
+      "configUrl": "widgets/mars-weather/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "pubmed-search",
+      "name": "PubMed Search",
+      "description": "Latest medical research",
+      "icon": "",
+      "configUrl": "widgets/pubmed-search/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "astronomy",
+  "name": "Astronomy",
+  "version": "1.0.0",
+  "description": "Astronomy data and stargazing tools",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "meteor-showers",
+      "name": "Meteor Showers",
+      "description": "Upcoming meteor showers",
+      "icon": "",
+      "configUrl": "widgets/meteor-showers/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "planet-visibility",
+      "name": "Planet Visibility",
+      "description": "Visible planets tonight",
+      "icon": "",
+      "configUrl": "widgets/planet-visibility/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "constellation-map",
+      "name": "Constellation Map",
+      "description": "Tonight's constellations",
+      "icon": "",
+      "configUrl": "widgets/constellation-map/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "type": "text",
+  "title": "Recipe of the Day",
+  "updateInterval": 0,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "cuisine": {
+        "type": "string",
+        "enum": ["any", "italian", "mexican", "chinese", "indian", "french", "american"],
+        "default": "any",
+        "description": "Cuisine type"
+      },
+      "diet": {
+        "type": "string",
+        "enum": ["any", "vegetarian", "vegan", "gluten-free"],
+        "default": "any",
+        "description": "Dietary preference"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://www.themealdb.com/api/json/v1/1/filter.php?c={{cuisine}}",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$.meals[0]"
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><img src='{{strMealThumb}}' alt='{{strMeal}}' style='width: 100%; max-height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;' /><div style='font-size: 1.2em; font-weight: bold;'>{{strMeal}}</div><a href='{{strSource}}' target='_blank' style='display: inline-block; margin-top: 12px; padding: 8px 16px; background: #da552f; color: white; text-decoration: none; border-radius: 6px; font-size: 0.9em;'>View Recipe</a></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

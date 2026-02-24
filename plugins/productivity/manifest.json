@@ -1,0 +1,33 @@
+{
+  "id": "productivity",
+  "name": "Productivity",
+  "version": "1.0.0",
+  "description": "Productivity tools and trackers",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "pomodoro",
+      "name": "Pomodoro Timer",
+      "description": "Focus timer with work/break intervals",
+      "icon": "",
+      "configUrl": "widgets/pomodoro/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "habit-tracker",
+      "name": "Habit Tracker",
+      "description": "Track daily habits",
+      "icon": "",
+      "configUrl": "widgets/habit-tracker/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "quote-day",
+      "name": "Quote of the Day",
+      "description": "Daily inspirational quote",
+      "icon": "",
+      "configUrl": "widgets/quote-day/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

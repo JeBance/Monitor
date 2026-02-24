@@ -1,0 +1,33 @@
+{
+  "id": "shopping",
+  "name": "Shopping & Deals",
+  "version": "1.0.0",
+  "description": "Price tracking and deal alerts",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "amazon-price",
+      "name": "Amazon Price",
+      "description": "Track Amazon product prices",
+      "icon": "",
+      "configUrl": "widgets/amazon-price/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "daily-deals",
+      "name": "Daily Deals",
+      "description": "Today's best deals",
+      "icon": "",
+      "configUrl": "widgets/daily-deals/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "price-alert",
+      "name": "Price Alert",
+      "description": "Get notified when price drops",
+      "icon": "",
+      "configUrl": "widgets/price-alert/config.json",
+      "sizes": ["small"]
+    }
+  ]
+}

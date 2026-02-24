@@ -1,0 +1,32 @@
+{
+  "type": "table",
+  "title": "Hacker News - Top Stories",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "limit": {
+        "type": "number",
+        "default": 15,
+        "minimum": 5,
+        "maximum": 30
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://hacker-news.firebaseio.com/v0/topstories.json",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$[:{{limit}}]"
+    }
+  },
+  "template": {
+    "html": "<div id='hn-container'>Loading...</div><script>(async()=>{const ids={{this}};const items=await Promise.all(ids.map(id=>fetch('https://hacker-news.firebaseio.com/v0/item/'+id+'.json').then(r=>r.json())));document.getElementById('hn-container').innerHTML='<table><thead><tr><th>#</th><th>Title</th><th>Points</th><th>Comments</th></tr></thead><tbody>'+items.map((item,i)=>'<tr><td>'+(i+1)+'</td><td><a href=\"'+(item.url||'https://news.ycombinator.com/item?id='+item.id)+'\" target=\"_blank\" style=\"color:#60a5fa;\">'+item.title+'</a></td><td>'+item.score+'</td><td>'+item.descendants+'</td></tr>').join('')+'</tbody></table>'})();</script>",
+    "sanitize": false
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

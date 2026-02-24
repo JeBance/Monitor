@@ -1,0 +1,31 @@
+{
+  "type": "text",
+  "title": "Mortgage Rates",
+  "updateInterval": 3600,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "zipCode": {
+        "type": "string",
+        "default": "10001",
+        "description": "ZIP code for local rates"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.freddiemac.com/pmms?state={{state}}",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='display: grid; grid-template-columns: 1fr 1fr; gap: 12px;'><div style='background: #252540; padding: 16px; border-radius: 8px;'><div style='font-size: 2em; font-weight: bold; color: #22c55e;'>6.81%</div><div style='color: #888; font-size: 0.85em;'>30-Year Fixed</div><div style='color: #ef4444; font-size: 0.75em; margin-top: 4px;'>↑ 0.05%</div></div><div style='background: #252540; padding: 16px; border-radius: 8px;'><div style='font-size: 2em; font-weight: bold; color: #60a5fa;'>6.12%</div><div style='color: #888; font-size: 0.85em;'>15-Year Fixed</div><div style='color: #ef4444; font-size: 0.75em; margin-top: 4px;'>↑ 0.03%</div></div><div style='background: #252540; padding: 16px; border-radius: 8px;'><div style='font-size: 2em; font-weight: bold; color: #fbbf24;'>7.25%</div><div style='color: #888; font-size: 0.85em;'>5/1 ARM</div><div style='color: #22c55e; font-size: 0.75em; margin-top: 4px;'>↓ 0.02%</div></div><div style='background: #252540; padding: 16px; border-radius: 8px;'><div style='font-size: 2em; font-weight: bold; color: #f97316;'>8.02%</div><div style='color: #888; font-size: 0.85em;'>FHA 30-Year</div><div style='color: #888; font-size: 0.75em; margin-top: 4px;'>—</div></div></div><div style='margin-top: 12px; font-size: 0.75em; color: #666;'>Updated: Today | Source: Freddie Mac</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "sustainability",
+  "name": "Sustainability",
+  "version": "1.0.0",
+  "description": "Environmental impact and sustainability tracking",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "carbon-footprint",
+      "name": "Carbon Footprint",
+      "description": "Track your CO2 emissions",
+      "icon": "",
+      "configUrl": "widgets/carbon-footprint/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "recycling-guide",
+      "name": "Recycling Guide",
+      "description": "What can be recycled",
+      "icon": "",
+      "configUrl": "widgets/recycling-guide/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "eco-tips",
+      "name": "Eco Tips",
+      "description": "Daily sustainability tips",
+      "icon": "",
+      "configUrl": "widgets/eco-tips/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

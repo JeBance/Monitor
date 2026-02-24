@@ -1,0 +1,17 @@
+{
+  "id": "weather-widget",
+  "name": "Weather",
+  "version": "1.0.0",
+  "description": "Current weather from Open-Meteo API (no API key required)",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "current-weather",
+      "name": "Current Weather",
+      "description": "Current weather conditions for your city",
+      "icon": "",
+      "configUrl": "widgets/current-weather/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

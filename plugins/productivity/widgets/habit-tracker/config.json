@@ -1,0 +1,31 @@
+{
+  "type": "table",
+  "title": "Habit Tracker",
+  "updateInterval": 0,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "habits": {
+        "type": "string",
+        "default": "Exercise,Read,Meditate,Code",
+        "description": "Comma-separated habit names"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://worldtimeapi.org/api/timezone/UTC",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='habits-{{widgetId}}'><table><thead><tr><th>Habit</th><th>Status</th></tr></thead><tbody>{{#each habits}}<tr><td>{{this}}</td><td><label><input type='checkbox' data-habit='{{this}}' /> Done</label></td></tr>{{/each}}</tbody></table></div><script>(function(){const key='habits-{{widgetId}}';const habits='{{habits}}'.split(',');const today=new Date().toDateString();let completed=JSON.parse(localStorage.getItem(key)||'{}');if(completed.date!==today){completed={date:today,habits:{}};localStorage.setItem(key,JSON.stringify(completed));}const container=document.getElementById('habits-{{widgetId}}');habits.forEach(habit=>{const checkbox=container.querySelector('input[data-habit=\"'+habit+'\"]');if(checkbox){checkbox.checked=!!completed.habits[habit];checkbox.addEventListener('change',()=>{completed.habits[habit]=checkbox.checked;localStorage.setItem(key,JSON.stringify(completed));});}});})();</script>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

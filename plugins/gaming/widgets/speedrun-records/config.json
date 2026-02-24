@@ -1,0 +1,37 @@
+{
+  "type": "table",
+  "title": "Speedrun Records",
+  "updateInterval": 3600,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "game": {
+        "type": "string",
+        "default": "minecraft",
+        "description": "Game name (speedrun.com)"
+      },
+      "category": {
+        "type": "string",
+        "default": "any%",
+        "enum": ["any%", "100%", "glitchless"],
+        "description": "Speedrun category"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://www.speedrun.com/api/v1/games/{{game}}/records?category={{category}}",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$.data[:5]"
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>#</th><th>Runner</th><th>Time</th></tr></thead><tbody>{{#each this}}<tr><td style='font-weight: bold; color: {{#if eq place 1}}#fbbf24{{else if eq place 2}}#9ca3af{{else if eq place 3}}#b45309{{/if}};'>{{place}}</td><td>{{run.player}}</td><td style='font-variant-numeric: tabular-nums;'>{{run.times.primary_t}}</td></tr>{{/each}}</tbody></table><div style='margin-top: 8px; font-size: 0.75em; color: #666; text-align: center;'>Source: speedrun.com</div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

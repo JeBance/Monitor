@@ -1,0 +1,25 @@
+{
+  "id": "environment",
+  "name": "Environment",
+  "version": "1.0.0",
+  "description": "Air quality, weather, and environmental data",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "air-quality",
+      "name": "Air Quality",
+      "description": "Air quality index for your location",
+      "icon": "",
+      "configUrl": "widgets/air-quality/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "sun-times",
+      "name": "Sun Times",
+      "description": "Sunrise and sunset times",
+      "icon": "",
+      "configUrl": "widgets/sun-times/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

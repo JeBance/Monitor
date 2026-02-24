@@ -1,0 +1,38 @@
+{
+  "type": "table",
+  "title": "Tech News",
+  "updateInterval": 600,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "source": {
+        "type": "string",
+        "enum": ["techcrunch", "wired", "theverge", "arstechnica"],
+        "default": "techcrunch",
+        "description": "News source"
+      },
+      "limit": {
+        "type": "number",
+        "default": 10,
+        "minimum": 5,
+        "maximum": 20
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.rss2json.com/v1/api.json?rss_url=https://{{source}}.com/feed&api_key=&count={{limit}}",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["items"]
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Title</th><th>Time</th></tr></thead><tbody>{{#each items}}<tr><td><a href='{{link}}' target='_blank' style='color: #60a5fa;'>{{title}}</a></td><td style='white-space: nowrap; color: #888;'>{{pubDate}}</td></tr>{{/each}}</tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

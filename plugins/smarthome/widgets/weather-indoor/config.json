@@ -1,0 +1,37 @@
+{
+  "type": "text",
+  "title": "Indoor Climate",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "temperatureUnit": {
+        "type": "string",
+        "enum": ["C", "F"],
+        "default": "C",
+        "description": "Temperature unit"
+      },
+      "targetTemp": {
+        "type": "number",
+        "default": 22,
+        "description": "Target temperature (°C)"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://worldtimeapi.org/api/timezone/UTC",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='indoor-{{widgetId}}' style='text-align: center;'><div style='display: grid; grid-template-columns: 1fr 1fr; gap: 16px;'><div style='background: #252540; padding: 16px; border-radius: 8px;'><div style='font-size: 2.5em; font-weight: bold; color: #f97316;'>{{temp}}</div><div style='color: #888; font-size: 0.9em;'>Temperature</div><div style='margin-top: 8px; font-size: 0.85em; color: {{#if gte temp targetTemp}}#ef4444{{else}}#22c55e{{/if}};'>{{#if gte temp targetTemp}}▲{{else}}▼{{/if}} {{diff}}° from target</div></div><div style='background: #252540; padding: 16px; border-radius: 8px;'><div style='font-size: 2.5em; font-weight: bold; color: #60a5fa;'>{{humidity}}%</div><div style='color: #888; font-size: 0.9em;'>Humidity</div><div style='margin-top: 8px; font-size: 0.85em; color: {{#if gte humidity 40}}{{#if lte humidity 60}}#22c55e{{else}}#fbbf24{{/if}}{{else}}#60a5fa{{/if}};'>{{#if gte humidity 40}}{{#if lte humidity 60}}Optimal{{else}}High{{/if}}{{else}}Low{{/if}}</div></div></div></div><script>(function(){const temp=22.5;const humidity=45;const target={{targetTemp}};const diff=Math.abs(temp-target).toFixed(1);const container=document.getElementById('indoor-{{widgetId}}');container.innerHTML=container.innerHTML.replace('{{temp}}',temp+'°{{temperatureUnit}}').replace('{{humidity}}',humidity).replace('{{diff}}',diff).replace('{{targetTemp}}',target).replace('{{temperatureUnit}}','{{temperatureUnit}}');})();</script>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

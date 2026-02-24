@@ -1,0 +1,34 @@
+{
+  "type": "table",
+  "title": "Uptime Monitor",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "apiKey": {
+        "type": "string",
+        "default": "",
+        "description": "Uptime Robot API key (read-only)"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.uptimerobot.com/v2/getMonitors?api_key={{apiKey}}&format=json&logs=0",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    "transform": {
+      "type": "pick",
+      "fields": ["monitors"]
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Monitor</th><th>Status</th><th>Uptime</th></tr></thead><tbody>{{#each monitors}}<tr><td>{{friendly_name}}</td><td style='color: {{#if eq status 2}}#22c55e{{else}}#ef4444{{/if}};'>{{#if eq status 2}}Up{{else}}Down{{/if}}</td><td>{{all_time_uptime_ratio}}%</td></tr>{{/each}}</tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

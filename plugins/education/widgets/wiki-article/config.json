@@ -1,0 +1,32 @@
+{
+  "type": "text",
+  "title": "Wikipedia Featured",
+  "updateInterval": 3600,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "language": {
+        "type": "string",
+        "enum": ["en", "de", "fr", "es", "ru"],
+        "default": "en",
+        "description": "Wikipedia language"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://{{language}}.wikipedia.org/api/rest_v1/feed/featured/{{year}}/{{month}}/{{day}}",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["tfa"]
+    }
+  },
+  "template": {
+    "html": "<div style='padding: 12px;'><div style='font-size: 1.2em; font-weight: bold; margin-bottom: 8px;'>{{tfa.title}}</div>{{#if tfa.thumbnail}}<img src='{{tfa.thumbnail.source}}' alt='{{tfa.title}}' style='width: 100%; max-height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;' />{{/if}}<div style='font-size: 0.9em; color: #aaa; line-height: 1.5;'>{{tfa.extract}}</div><a href='{{tfa.content_urls.desktop.page}}' target='_blank' style='display: inline-block; margin-top: 12px; color: #60a5fa; font-size: 0.9em;'>Read more →</a></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

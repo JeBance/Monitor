@@ -1,0 +1,38 @@
+{
+  "type": "text",
+  "title": "Trivia Question",
+  "updateInterval": 0,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "category": {
+        "type": "string",
+        "enum": ["any", "9", "17", "18", "21", "22", "23", "27", "28"],
+        "default": "any",
+        "description": "Question category (9=General, 17=Science, 18=Computers)"
+      },
+      "difficulty": {
+        "type": "string",
+        "enum": ["any", "easy", "medium", "hard"],
+        "default": "medium",
+        "description": "Question difficulty"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://opentdb.com/api.php?amount=1&category={{category}}&difficulty={{difficulty}}&type=multiple",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$.results[0]"
+    }
+  },
+  "template": {
+    "html": "<div id='trivia-{{widgetId}}' style='padding: 12px;'><div style='font-size: 0.85em; color: #888; margin-bottom: 8px;'>{{category}} | {{difficulty}}</div><div style='font-size: 1.1em; margin-bottom: 16px;'>{{question}}</div><div id='answers-{{widgetId}}' style='display: grid; gap: 8px;'></div><div id='result-{{widgetId}}' style='margin-top: 12px; font-weight: bold;'></div></div><script>(function(){const data={{this}};const answers=[...data.incorrect_answers,data.correct_answer].sort(()=>Math.random()-0.5);const container=document.getElementById('answers-{{widgetId}}');let html='';answers.forEach(a=>{html+='<button onclick=\"document.getElementById(\\'result-{{widgetId}}\\').textContent=this.textContent===\\''+data.correct_answer.replace(/'/g,\"\\\\'\")+\"\\'?\\\"✓ Correct!\\\":\\\"✗ Wrong!\\\"\"' style='background:#252540;color:#e0e0e0;border:1px solid #333;padding:8px;border-radius:6px;cursor:pointer;width:100%;text-align:left;'>'+a+'</button>';});container.innerHTML=html;})();</script>",
+    "sanitize": false
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "github-stats",
+  "name": "GitHub Stats",
+  "version": "1.0.0",
+  "description": "GitHub repository and user statistics",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "repo-stats",
+      "name": "Repository Stats",
+      "description": "Statistics for a GitHub repository",
+      "icon": "",
+      "configUrl": "widgets/repo-stats/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "user-profile",
+      "name": "User Profile",
+      "description": "GitHub user profile information",
+      "icon": "",
+      "configUrl": "widgets/user-profile/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "recent-commits",
+      "name": "Recent Commits",
+      "description": "Recent commits from a repository",
+      "icon": "",
+      "configUrl": "widgets/recent-commits/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

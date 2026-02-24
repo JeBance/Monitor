@@ -1,0 +1,31 @@
+{
+  "type": "table",
+  "title": "World Clock",
+  "updateInterval": 60,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "cities": {
+        "type": "string",
+        "default": "America/New_York,Europe/London,Europe/Moscow,Asia/Tokyo,Australia/Sydney",
+        "description": "Comma-separated timezones"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://worldtimeapi.org/api/timezone/America/New_York",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='world-clock-{{widgetId}}'><table><thead><tr><th>City</th><th>Time</th><th>Offset</th></tr></thead><tbody>{{#each cities}}<tr><td>{{this}}</td><td>--:--</td><td>--</td></tr>{{/each}}</tbody></table></div><script>(function(){const timezones='{{cities}}'.split(',');const cityNames={'America/New_York':'New York','Europe/London':'London','Europe/Moscow':'Moscow','Asia/Tokyo':'Tokyo','Australia/Sydney':'Sydney','Europe/Paris':'Paris','America/Los_Angeles':'Los Angeles','Asia/Shanghai':'Shanghai'};function updateClocks(){const now=new Date();let html='<table><thead><tr><th>City</th><th>Time</th><th>Offset</th></tr></thead><tbody>';timezones.forEach(tz=>{const time=new Date(now.toLocaleString('en-US',{timeZone:tz}));const offset=tz.split('/')[1].replace('_',' ');const hours=time.getHours().toString().padStart(2,'0');const mins=time.getMinutes().toString().padStart(2,'0');html+='<tr><td>'+(cityNames[tz]||offset)+'</td><td style=\"font-variant-numeric: tabular-nums;\">'+hours+':'+mins+'</td><td>'+tz+'</td></tr>';});html+='</tbody></table>';document.getElementById('world-clock-{{widgetId}}').innerHTML=html;}updateClocks();setInterval(updateClocks,1000);})();</script>",
+    "sanitize": false
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

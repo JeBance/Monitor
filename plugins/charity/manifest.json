@@ -1,0 +1,33 @@
+{
+  "id": "charity",
+  "name": "Charity & Nonprofit",
+  "version": "1.0.0",
+  "description": "Charity information and donation tracking",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "charity-navigator",
+      "name": "Charity Ratings",
+      "description": "Charity ratings and information",
+      "icon": "",
+      "configUrl": "widgets/charity-navigator/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "donation-tracker",
+      "name": "Donation Tracker",
+      "description": "Track your charitable giving",
+      "icon": "",
+      "configUrl": "widgets/donation-tracker/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "volunteer-opps",
+      "name": "Volunteer Opportunities",
+      "description": "Local volunteer opportunities",
+      "icon": "",
+      "configUrl": "widgets/volunteer-opps/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

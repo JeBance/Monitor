@@ -1,0 +1,25 @@
+{
+  "id": "betting-odds",
+  "name": "Betting & Odds",
+  "version": "1.0.0",
+  "description": "Sports betting odds and predictions",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "today-odds",
+      "name": "Today's Odds",
+      "description": "Current betting odds",
+      "icon": "",
+      "configUrl": "widgets/today-odds/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "bet-tracker",
+      "name": "Bet Tracker",
+      "description": "Track your bets",
+      "icon": "",
+      "configUrl": "widgets/bet-tracker/config.json",
+      "sizes": ["medium"]
+    }
+  ]
+}

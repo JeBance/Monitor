@@ -1,0 +1,33 @@
+{
+  "id": "maritime",
+  "name": "Maritime",
+  "version": "1.0.0",
+  "description": "Marine weather and vessel tracking",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "marine-weather",
+      "name": "Marine Weather",
+      "description": "Ocean weather forecast",
+      "icon": "",
+      "configUrl": "widgets/marine-weather/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "tide-chart",
+      "name": "Tide Chart",
+      "description": "Tidal predictions",
+      "icon": "",
+      "configUrl": "widgets/tide-chart/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "vessel-tracker",
+      "name": "Vessel Tracker",
+      "description": "Ship and boat positions",
+      "icon": "",
+      "configUrl": "widgets/vessel-tracker/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

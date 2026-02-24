@@ -1,0 +1,33 @@
+{
+  "id": "agriculture",
+  "name": "Agriculture",
+  "version": "1.0.0",
+  "description": "Farming and agricultural data",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "crop-prices",
+      "name": "Crop Prices",
+      "description": "Commodity prices",
+      "icon": "",
+      "configUrl": "widgets/crop-prices/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "soil-conditions",
+      "name": "Soil Conditions",
+      "description": "Soil moisture and temperature",
+      "icon": "",
+      "configUrl": "widgets/soil-conditions/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "planting-calendar",
+      "name": "Planting Calendar",
+      "description": "Best planting times",
+      "icon": "",
+      "configUrl": "widgets/planting-calendar/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

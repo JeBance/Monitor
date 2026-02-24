@@ -1,0 +1,36 @@
+{
+  "type": "indicator",
+  "title": "Air Quality",
+  "updateInterval": 1800,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "latitude": {
+        "type": "number",
+        "default": 55.7558,
+        "description": "Location latitude"
+      },
+      "longitude": {
+        "type": "number",
+        "default": 37.6173,
+        "description": "Location longitude"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude={{latitude}}&longitude={{longitude}}&current=us_aqi",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$.current.us_aqi"
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='font-size: 3em; font-weight: bold; color: {{#if lte this 50}}#22c55e{{else if lte this 100}}#eab308{{else if lte this 150}}#f97316{{else}}#ef4444{{/if}};'>{{this}}</div><div style='margin-top: 8px; font-size: 1.1em; color: {{#if lte this 50}}#22c55e{{else if lte this 100}}#eab308{{else if lte this 150}}#f97316{{else}}#ef4444{{/if}};'>{{#if lte this 50}}Good{{else if lte this 100}}Moderate{{else if lte this 150}}Unhealthy for Sensitive{{else}}Unhealthy{{/if}}</div><div style='color: #888; margin-top: 8px; font-size: 0.85em;'>US AQI</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

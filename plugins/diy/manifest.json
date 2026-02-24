@@ -1,0 +1,33 @@
+{
+  "id": "diy",
+  "name": "DIY & Home Improvement",
+  "version": "1.0.0",
+  "description": "DIY projects and home improvement tips",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "project-ideas",
+      "name": "Project Ideas",
+      "description": "Daily DIY project inspiration",
+      "icon": "",
+      "configUrl": "widgets/project-ideas/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "tool-guide",
+      "name": "Tool Guide",
+      "description": "Tool usage and safety tips",
+      "icon": "",
+      "configUrl": "widgets/tool-guide/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "measurement-convert",
+      "name": "Measurement Converter",
+      "description": "Convert between measurement units",
+      "icon": "",
+      "configUrl": "widgets/measurement-convert/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

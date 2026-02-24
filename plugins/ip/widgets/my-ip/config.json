@@ -1,0 +1,31 @@
+{
+  "type": "text",
+  "title": "My IP Address",
+  "updateInterval": 0,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "showMap": {
+        "type": "boolean",
+        "default": false,
+        "description": "Show location map"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://ipapi.co/json/",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["ip", "city", "region", "country_name", "org", "timezone", "latitude", "longitude"]
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='font-size: 2em; font-weight: bold; color: #60a5fa;'>{{ip}}</div><div style='margin-top: 12px; color: #aaa;'><div style='font-size: 1.2em;'>{{city}}, {{region}}</div><div style='color: #888;'>{{country_name}}</div></div><div style='margin-top: 12px; padding: 8px; background: #252540; border-radius: 6px; font-size: 0.85em; color: #888;'><div>ISP: {{org}}</div><div>Timezone: {{timezone}}</div></div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "career",
+  "name": "Career & Jobs",
+  "version": "1.0.0",
+  "description": "Job search and career development",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "job-listings",
+      "name": "Job Listings",
+      "description": "Latest job openings in your field",
+      "icon": "",
+      "configUrl": "widgets/job-listings/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "salary-tracker",
+      "name": "Salary Tracker",
+      "description": "Average salaries by position",
+      "icon": "",
+      "configUrl": "widgets/salary-tracker/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "interview-tips",
+      "name": "Interview Tips",
+      "description": "Daily interview preparation tips",
+      "icon": "",
+      "configUrl": "widgets/interview-tips/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

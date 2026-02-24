@@ -1,0 +1,36 @@
+{
+  "type": "text",
+  "title": "Date",
+  "updateInterval": 60,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "locale": {
+        "type": "string",
+        "default": "en-US",
+        "description": "Locale for date format (e.g., en-US, ru-RU, de-DE)"
+      },
+      "showWeekday": {
+        "type": "boolean",
+        "default": true,
+        "description": "Show day of week"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://worldtimeapi.org/api/timezone/UTC",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["datetime"]
+    }
+  },
+  "template": {
+    "html": "<div id='date-{{widgetId}}' style='text-align: center;'><div style='font-size: 2.5em; font-weight: bold;'><!--date--></div><div style='color: #888; margin-top: 8px; font-size: 1.1em;'><!--weekday--></div></div><script>(function(){const now=new Date();const options={year:'numeric',month:'long',day:'numeric'};const weekdayOptions={weekday:'long'};const dateStr=now.toLocaleDateString('{{locale}}',options);const weekdayStr=now.toLocaleDateString('{{locale}}',weekdayOptions);const container=document.getElementById('date-{{widgetId}}');container.querySelector('div:first-child').textContent=dateStr;container.querySelector('div:last-child').textContent={{showWeekday}}?weekdayStr:'';})();</script>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "language-learning",
+  "name": "Language Learning",
+  "version": "1.0.0",
+  "description": "Learn new languages with daily practice",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "vocab-day",
+      "name": "Word of the Day",
+      "description": "Learn a new foreign word daily",
+      "icon": "",
+      "configUrl": "widgets/vocab-day/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "phrase-book",
+      "name": "Phrase Book",
+      "description": "Common phrases in target language",
+      "icon": "",
+      "configUrl": "widgets/phrase-book/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "conjugation",
+      "name": "Verb Conjugation",
+      "description": "Daily verb conjugation practice",
+      "icon": "",
+      "configUrl": "widgets/conjugation/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

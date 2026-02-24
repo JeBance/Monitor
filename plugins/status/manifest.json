@@ -1,0 +1,25 @@
+{
+  "id": "system-status",
+  "name": "System Status",
+  "version": "1.0.0",
+  "description": "Monitor service and website status pages",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "github-status",
+      "name": "GitHub Status",
+      "description": "GitHub services status",
+      "icon": "",
+      "configUrl": "widgets/github-status/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "uptime-robot",
+      "name": "Uptime Robot",
+      "description": "Website uptime monitoring",
+      "icon": "",
+      "configUrl": "widgets/uptime-robot/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

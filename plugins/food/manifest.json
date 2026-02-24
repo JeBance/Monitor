@@ -1,0 +1,25 @@
+{
+  "id": "food-recipes",
+  "name": "Food & Recipes",
+  "version": "1.0.0",
+  "description": "Recipes and meal ideas",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "random-recipe",
+      "name": "Random Recipe",
+      "description": "Discover new recipes",
+      "icon": "",
+      "configUrl": "widgets/random-recipe/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "meal-ideas",
+      "name": "Meal Ideas",
+      "description": "Daily meal suggestions",
+      "icon": "",
+      "configUrl": "widgets/meal-ideas/config.json",
+      "sizes": ["medium"]
+    }
+  ]
+}

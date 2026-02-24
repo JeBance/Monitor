@@ -1,0 +1,25 @@
+{
+  "id": "stock-prices",
+  "name": "Stock Prices",
+  "version": "1.0.0",
+  "description": "Stock prices and market data",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "stock-quote",
+      "name": "Stock Quote",
+      "description": "Real-time stock price quote",
+      "icon": "",
+      "configUrl": "widgets/stock-quote/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "market-indices",
+      "name": "Market Indices",
+      "description": "Major market indices overview",
+      "icon": "",
+      "configUrl": "widgets/market-indices/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

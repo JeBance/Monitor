@@ -1,0 +1,42 @@
+{
+  "type": "indicator",
+  "title": "{{from}}/{{to}}",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "from": {
+        "type": "string",
+        "default": "USD",
+        "description": "Base currency"
+      },
+      "to": {
+        "type": "string",
+        "default": "EUR",
+        "description": "Target currency"
+      },
+      "amount": {
+        "type": "number",
+        "default": 1,
+        "minimum": 0.01,
+        "description": "Amount to convert"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.exchangerate-api.com/v4/latest/{{from}}",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$.rates.{{to}}"
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='font-size: 2.5em; font-weight: bold; color: #22c55e;'>{{result}}</div><div style='color: #888; margin-top: 8px;'>{{from}} {{amount}} = {{result}} {{to}}</div><div style='color: #666; margin-top: 4px; font-size: 0.9em;'>1 {{from}} = {{this}} {{to}}</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

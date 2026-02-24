@@ -1,0 +1,35 @@
+{
+  "type": "table",
+  "title": "Product Hunt - Top of the Day",
+  "updateInterval": 600,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "limit": {
+        "type": "number",
+        "default": 10,
+        "minimum": 5,
+        "maximum": 20
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.producthunt.com/v2/api/graphql",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$.data.posts.posts[*]"
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Product</th><th>Upvotes</th><th>Comments</th></tr></thead><tbody>{{#each this}}<tr><td><a href='{{url}}' target='_blank' style='color: #da552f;'>{{name}}</a><br/><span style='color: #888; font-size: 0.85em;'>{{tagline}}</span></td><td style='color: #da552f;'>{{votesCount}}</td><td>{{commentsCount}}</td></tr>{{/each}}</tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

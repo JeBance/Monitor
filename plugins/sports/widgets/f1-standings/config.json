@@ -1,0 +1,33 @@
+{
+  "type": "table",
+  "title": "F1 Driver Standings",
+  "updateInterval": 3600,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "season": {
+        "type": "number",
+        "default": 2024,
+        "minimum": 2020,
+        "maximum": 2025,
+        "description": "Season year"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://ergast.com/api/f1/{{season}}/driverStandings.json",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$.MRData.StandingsTable.StandingsLists[0].DriverStandings"
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>#</th><th>Driver</th><th>Team</th><th>Points</th></tr></thead><tbody>{{#each this}}<tr><td style='font-weight: bold; color: {{#if eq position \"1\"}}#fbbf24{{else if eq position \"2\"}}#9ca3af{{else if eq position \"3\"}}#b45309{{/if}};'>{{position}}</td><td>{{Driver.givenName}} {{Driver.familyName}}</td><td>{{Constructors[0].name}}</td><td style='font-weight: bold;'>{{points}}</td></tr>{{/each}}</tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

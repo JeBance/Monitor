@@ -1,0 +1,33 @@
+{
+  "id": "photography",
+  "name": "Photography",
+  "version": "1.0.0",
+  "description": "Photography tools and inspiration",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "golden-hour",
+      "name": "Golden Hour",
+      "description": "Best light times for photography",
+      "icon": "",
+      "configUrl": "widgets/golden-hour/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "photo-challenge",
+      "name": "Photo Challenge",
+      "description": "Daily photography challenge",
+      "icon": "",
+      "configUrl": "widgets/photo-challenge/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "exposure-calc",
+      "name": "Exposure Calculator",
+      "description": "Quick exposure settings reference",
+      "icon": "",
+      "configUrl": "widgets/exposure-calc/config.json",
+      "sizes": ["medium"]
+    }
+  ]
+}

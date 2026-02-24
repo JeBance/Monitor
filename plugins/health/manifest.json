@@ -1,0 +1,33 @@
+{
+  "id": "health-fitness",
+  "name": "Health & Fitness",
+  "version": "1.0.0",
+  "description": "Health and fitness tracking widgets",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "bmi-calculator",
+      "name": "BMI Calculator",
+      "description": "Body Mass Index calculator",
+      "icon": "",
+      "configUrl": "widgets/bmi-calculator/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "water-tracker",
+      "name": "Water Tracker",
+      "description": "Daily water intake tracker",
+      "icon": "",
+      "configUrl": "widgets/water-tracker/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "step-counter",
+      "name": "Step Counter",
+      "description": "Daily step goal tracker",
+      "icon": "",
+      "configUrl": "widgets/step-counter/config.json",
+      "sizes": ["medium"]
+    }
+  ]
+}

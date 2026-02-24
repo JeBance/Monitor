@@ -1,0 +1,37 @@
+{
+  "type": "text",
+  "title": "Amazon: {{asin}}",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "asin": {
+        "type": "string",
+        "default": "B09V3KXJPB",
+        "description": "Amazon ASIN"
+      },
+      "region": {
+        "type": "string",
+        "default": "US",
+        "enum": ["US", "UK", "DE", "FR", "JP"],
+        "description": "Amazon region"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.keepa.com/product?key={{apiKey}}&domain=1&asin={{asin}}",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='font-size: 2em; font-weight: bold; color: #f97316;'>$299.99</div><div style='color: #888; margin-top: 8px; font-size: 0.9em;'>Was: <span style='text-decoration: line-through;'>$399.99</span></div><div style='margin-top: 8px;'><span style='background: #22c55e; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85em;'>25% OFF</span></div><a href='https://amazon.com/dp/{{asin}}' target='_blank' style='display: inline-block; margin-top: 12px; padding: 8px 16px; background: #f97316; color: white; text-decoration: none; border-radius: 6px; font-size: 0.9em;'>View on Amazon</a></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

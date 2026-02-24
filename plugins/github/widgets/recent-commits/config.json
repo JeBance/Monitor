@@ -1,0 +1,42 @@
+{
+  "type": "table",
+  "title": "Recent Commits: {{owner}}/{{repo}}",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "owner": {
+        "type": "string",
+        "default": "facebook",
+        "description": "Repository owner"
+      },
+      "repo": {
+        "type": "string",
+        "default": "react",
+        "description": "Repository name"
+      },
+      "limit": {
+        "type": "number",
+        "default": 10,
+        "minimum": 5,
+        "maximum": 30
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.github.com/repos/{{owner}}/{{repo}}/commits?per_page={{limit}}",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$[*].commit"
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Message</th><th>Author</th><th>Date</th></tr></thead><tbody>{{#each this}}<tr><td style='max-width: 300px; overflow: hidden; text-overflow: ellipsis;'>{{message}}</td><td>{{author.name}}</td><td style='white-space: nowrap;'>{{date}}</td></tr>{{/each}}</tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

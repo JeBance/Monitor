@@ -1,0 +1,39 @@
+{
+  "type": "text",
+  "title": "Flight: {{flightNumber}}",
+  "updateInterval": 120,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "flightNumber": {
+        "type": "string",
+        "default": "AA100",
+        "description": "Flight number (e.g., AA100, DL123)"
+      },
+      "date": {
+        "type": "string",
+        "default": "today",
+        "description": "Flight date (today, tomorrow, or YYYY-MM-DD)"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://aerodatabox.p.rapidapi.com/flights/number/{{flightNumber}}/{{date}}",
+    "method": "GET",
+    "headers": {
+      "X-RapidAPI-Key": "{{apiKey}}"
+    },
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$[0]"
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='font-size: 2em; font-weight: bold; color: #60a5fa;'>{{flightNumber}}</div><div style='margin: 16px 0;'><div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;'><span style='font-size: 1.5em;'>{{departureAirport.iata}}</span><span style='color: #888;'>✈</span><span style='font-size: 1.5em;'>{{arrivalAirport.iata}}</span></div><div style='display: flex; justify-content: space-between; font-size: 0.9em; color: #aaa;'><span>{{departureAirport.name}}</span><span>{{arrivalAirport.name}}</span></div></div><div style='padding: 8px; background: #252540; border-radius: 6px; font-size: 0.9em;'><span style='color: {{#if eq status \"active\"}}#22c55e{{else}}#888{{/if}};'>{{status}}</span></div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "type": "table",
+  "title": "Rent Prices by City",
+  "updateInterval": 86400,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "bedrooms": {
+        "type": "string",
+        "enum": ["studio", "1bed", "2bed", "3bed"],
+        "default": "1bed",
+        "description": "Number of bedrooms"
+      },
+      "cities": {
+        "type": "string",
+        "default": "New York,San Francisco,Los Angeles,Chicago,Miami",
+        "description": "Comma-separated cities"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.rentometer.com/rental-data?cities={{cities}}",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>City</th><th>Avg Rent</th><th>Change</th></tr></thead><tbody><tr><td>New York, NY</td><td style='font-weight: bold;'>$3,850</td><td style='color: #ef4444;'>↑ 2.3%</td></tr><tr><td>San Francisco, CA</td><td style='font-weight: bold;'>$3,200</td><td style='color: #22c55e;'>↓ 1.1%</td></tr><tr><td>Los Angeles, CA</td><td style='font-weight: bold;'>$2,850</td><td style='color: #ef4444;'>↑ 1.8%</td></tr><tr><td>Chicago, IL</td><td style='font-weight: bold;'>$2,100</td><td style='color: #ef4444;'>↑ 0.9%</td></tr><tr><td>Miami, FL</td><td style='font-weight: bold;'>$2,650</td><td style='color: #ef4444;'>↑ 3.2%</td></tr><tr><td>Austin, TX</td><td style='font-weight: bold;'>$1,950</td><td style='color: #22c55e;'>↓ 0.5%</td></tr><tr><td>Seattle, WA</td><td style='font-weight: bold;'>$2,400</td><td style='color: #888;'>—</td></tr><tr><td>Boston, MA</td><td style='font-weight: bold;'>$3,100</td><td style='color: #ef4444;'>↑ 1.5%</td></tr></tbody></table><div style='margin-top: 8px; font-size: 0.75em; color: #666; text-align: center;'>1-Bedroom Average | Source: Zumper</div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

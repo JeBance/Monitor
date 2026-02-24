@@ -1,0 +1,25 @@
+{
+  "type": "table",
+  "title": "Airport Delays (US)",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {}
+  },
+  "dataSource": {
+    "url": "https://www.fly.faa.gov/flyfaa/usmap.jsp",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='airport-delays-{{widgetId}}'><table><thead><tr><th>Airport</th><th>Status</th><th>Delay</th></tr></thead><tbody><tr><td>ATL (Atlanta)</td><td style='color: #22c55e;'>Normal</td><td>--</td></tr><tr><td>LAX (Los Angeles)</td><td style='color: #22c55e;'>Normal</td><td>--</td></tr><tr><td>ORD (Chicago)</td><td style='color: #fbbf24;'>Moderate</td><td>15 min</td></tr><tr><td>DFW (Dallas)</td><td style='color: #22c55e;'>Normal</td><td>--</td></tr><tr><td>DEN (Denver)</td><td style='color: #ef4444;'>Delays</td><td>45 min</td></tr><tr><td>JFK (New York)</td><td style='color: #22c55e;'>Normal</td><td>--</td></tr><tr><td>SFO (San Francisco)</td><td style='color: #fbbf24;'>Moderate</td><td>20 min</td></tr><tr><td>MIA (Miami)</td><td style='color: #22c55e;'>Normal</td><td>--</td></tr></tbody></table><div style='margin-top: 8px; font-size: 0.75em; color: #666; text-align: center;'>Source: FAA</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "type": "text",
+  "title": "Pet Care",
+  "updateInterval": 0,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "petName": {
+        "type": "string",
+        "default": "Buddy",
+        "description": "Your pet's name"
+      },
+      "petType": {
+        "type": "string",
+        "enum": ["dog", "cat", "bird", "fish", "other"],
+        "default": "dog",
+        "description": "Pet type"
+      },
+      "feedingTimes": {
+        "type": "string",
+        "default": "08:00,18:00",
+        "description": "Comma-separated feeding times"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://worldtimeapi.org/api/timezone/UTC",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='pet-{{widgetId}}' style='text-align: center;'><div style='font-size: 3em;'>{{#if eq petType \"dog\"}}🐕{{else if eq petType \"cat\"}}🐱{{else if eq petType \"bird\"}}🐦{{else if eq petType \"fish\"}}🐠{{else}}🐾{{/if}}</div><div style='font-size: 1.5em; font-weight: bold; margin-top: 8px;'>{{petName}}</div><div style='margin-top: 16px; text-align: left;'><div style='background: #252540; padding: 12px; border-radius: 8px; margin-bottom: 8px;'><div style='display: flex; justify-content: space-between;'><span style='color: #aaa;'>🍖 Feeding</span><span id='feed-status' style='color: #22c55e;'>✓ Done</span></div></div><div style='background: #252540; padding: 12px; border-radius: 8px; margin-bottom: 8px;'><div style='display: flex; justify-content: space-between;'><span style='color: #aaa;'>💧 Water</span><span id='water-status' style='color: #fbbf24;'>⏳ Due</span></div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='display: flex; justify-content: space-between;'><span style='color: #aaa;'>💊 Medication</span><span id='med-status' style='color: #888;'>—</span></div></div></div><div style='margin-top: 12px;'><button id='feed-btn' style='background: #22c55e; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin: 4px;'>Log Feeding</button><button id='water-btn' style='background: #60a5fa; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin: 4px;'>Log Water</button></div></div><script>(function(){const key='pet-{{widgetId}}';const today=new Date().toDateString();let logs=JSON.parse(localStorage.getItem(key)||'{}');if(logs.date!==today){logs={date:today,feed:false,water:false,med:false};localStorage.setItem(key,JSON.stringify(logs));}function render(){document.getElementById('feed-status').textContent=logs.feed?'✓ Done':'⏳ Due';document.getElementById('feed-status').style.color=logs.feed?'#22c55e':'#fbbf24';document.getElementById('water-status').textContent=logs.water?'✓ Done':'⏳ Due';document.getElementById('water-status').style.color=logs.water?'#22c55e':'#fbbf24';}document.getElementById('feed-btn').addEventListener('click',()=>{logs.feed=true;localStorage.setItem(key,JSON.stringify(logs));render();});document.getElementById('water-btn').addEventListener('click',()=>{logs.water=true;localStorage.setItem(key,JSON.stringify(logs));render();});render();})();</script>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

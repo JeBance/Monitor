@@ -1,0 +1,33 @@
+{
+  "id": "entertainment",
+  "name": "Entertainment",
+  "version": "1.0.0",
+  "description": "Fun and entertainment widgets",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "dad-jokes",
+      "name": "Dad Jokes",
+      "description": "Random dad jokes for a laugh",
+      "icon": "",
+      "configUrl": "widgets/dad-jokes/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "random-facts",
+      "name": "Random Facts",
+      "description": "Interesting random facts",
+      "icon": "",
+      "configUrl": "widgets/random-facts/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "movie-info",
+      "name": "Movie Info",
+      "description": "Movie details and ratings",
+      "icon": "",
+      "configUrl": "widgets/movie-info/config.json",
+      "sizes": ["medium"]
+    }
+  ]
+}

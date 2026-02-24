@@ -1,0 +1,31 @@
+{
+  "type": "table",
+  "title": "Meal Plan",
+  "updateInterval": 0,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "meals": {
+        "type": "string",
+        "default": "Breakfast,Lunch,Dinner,Snack",
+        "description": "Comma-separated meal types"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://www.themealdb.com/api/json/v1/1/filter.php?c=Italian",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='meal-plan-{{widgetId}}'><table><thead><tr><th>Meal</th><th>Suggestion</th></tr></thead><tbody>{{#each meals}}<tr><td>{{this}}</td><td>--</td></tr>{{/each}}</tbody></table></div><script>(function(){const meals='{{meals}}'.split(',');const suggestions=['Oatmeal with Berries','Grilled Chicken Salad','Pasta Carbonara','Greek Yogurt with Nuts','Avocado Toast','Salmon with Vegetables','Stir-Fry Tofu','Fruit Smoothie'];const container=document.getElementById('meal-plan-{{widgetId}}');let html='<table><thead><tr><th>Meal</th><th>Suggestion</th></tr></thead><tbody>';meals.forEach((meal,i)=>{html+='<tr><td style=\"font-weight: bold;\">'+meal+'</td><td>'+suggestions[i%suggestions.length]+'</td></tr>';});html+='</tbody></table>';container.innerHTML=html;})();</script>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

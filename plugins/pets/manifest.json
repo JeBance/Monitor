@@ -1,0 +1,33 @@
+{
+  "id": "pets",
+  "name": "Pets & Animals",
+  "version": "1.0.0",
+  "description": "Pet care and animal information",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "pet-reminder",
+      "name": "Pet Reminder",
+      "description": "Feeding and medication reminders",
+      "icon": "",
+      "configUrl": "widgets/pet-reminder/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "dog-breeds",
+      "name": "Dog Breed Info",
+      "description": "Information about dog breeds",
+      "icon": "",
+      "configUrl": "widgets/dog-breeds/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "pet-adoption",
+      "name": "Pet Adoption",
+      "description": "Adoptable pets near you",
+      "icon": "",
+      "configUrl": "widgets/pet-adoption/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

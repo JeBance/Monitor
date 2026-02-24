@@ -1,0 +1,33 @@
+{
+  "id": "real-estate",
+  "name": "Real Estate",
+  "version": "1.0.0",
+  "description": "Property prices and market data",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "housing-index",
+      "name": "Housing Index",
+      "description": "National housing price index",
+      "icon": "",
+      "configUrl": "widgets/housing-index/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "mortgage-rates",
+      "name": "Mortgage Rates",
+      "description": "Current mortgage interest rates",
+      "icon": "",
+      "configUrl": "widgets/mortgage-rates/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "rent-tracker",
+      "name": "Rent Tracker",
+      "description": "Average rent prices by city",
+      "icon": "",
+      "configUrl": "widgets/rent-tracker/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

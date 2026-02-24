@@ -1,0 +1,32 @@
+{
+  "type": "table",
+  "title": "Steam Specials",
+  "updateInterval": 600,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "limit": {
+        "type": "number",
+        "default": 10,
+        "minimum": 5,
+        "maximum": 20
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://store.steampowered.com/api/featuredcategories/",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$.specials.items[:{{limit}}]"
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Game</th><th>Discount</th><th>Price</th></tr></thead><tbody>{{#each this}}<tr><td><a href='https://store.steampowered.com/app/{{id}}' target='_blank' style='color: #60a5fa;'>{{name}}</a></td><td style='color: #22c55e; font-weight: bold;'>-{{discount_percent}}%</td><td style='color: #888; text-decoration: line-through; font-size: 0.85em;'>${{original_price/100}}</td><td style='font-weight: bold;'>${{final_price/100}}</td></tr>{{/each}}</tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

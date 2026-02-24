@@ -1,0 +1,37 @@
+{
+  "type": "table",
+  "title": "Top Cryptocurrencies",
+  "updateInterval": 120,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "currency": {
+        "type": "string",
+        "enum": ["usd", "eur", "gbp"],
+        "default": "usd"
+      },
+      "limit": {
+        "type": "number",
+        "default": 10,
+        "minimum": 5,
+        "maximum": 50
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.coingecko.com/api/v3/coins/markets?vs_currency={{currency}}&order=market_cap_desc&per_page={{limit}}&page=1&sparkline=false",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["name", "symbol", "current_price", "market_cap", "price_change_percentage_24h"]
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>#</th><th>Name</th><th>Price</th><th>24h %</th></tr></thead><tbody>{{#each this}}<tr><td>{{market_cap_rank}}</td><td>{{name}} ({{symbol}})</td><td>${{current_price}}</td><td style='color: {{#if (gt price_change_percentage_24h 0)}}#22c55e{{else}}#ef4444{{/if}}'>{{price_change_percentage_24h}}%</td></tr>{{/each}}</tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "text",
+  "title": "GitHub Status",
+  "updateInterval": 120,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {}
+  },
+  "dataSource": {
+    "url": "https://www.githubstatus.com/api/v2/status.json",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["status", "description", "updated_at"]
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='font-size: 3em; margin-bottom: 8px;'>{{#if eq status \"operational\"}}✅{{else}}⚠️{{/if}}</div><div style='font-size: 1.3em; font-weight: bold; color: {{#if eq status \"operational\"}}#22c55e{{else}}#f59e0b{{/if}};'>{{description}}</div><div style='color: #888; margin-top: 8px; font-size: 0.85em;'>Updated: {{updated_at}}</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

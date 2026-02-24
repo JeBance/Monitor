@@ -1,0 +1,33 @@
+{
+  "id": "art-culture",
+  "name": "Art & Culture",
+  "version": "1.0.0",
+  "description": "Art, museums, and cultural events",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "museum-exhibits",
+      "name": "Museum Exhibits",
+      "description": "Current exhibitions",
+      "icon": "",
+      "configUrl": "widgets/museum-exhibits/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "art-piece-day",
+      "name": "Art Piece of the Day",
+      "description": "Featured artwork",
+      "icon": "",
+      "configUrl": "widgets/art-piece-day/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "cultural-events",
+      "name": "Cultural Events",
+      "description": "Local cultural events",
+      "icon": "",
+      "configUrl": "widgets/cultural-events/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

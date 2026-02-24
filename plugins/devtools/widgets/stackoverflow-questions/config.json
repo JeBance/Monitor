@@ -1,0 +1,37 @@
+{
+  "type": "table",
+  "title": "Stack Overflow Hot",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "tag": {
+        "type": "string",
+        "default": "javascript",
+        "description": "Filter by tag"
+      },
+      "limit": {
+        "type": "number",
+        "default": 10,
+        "minimum": 5,
+        "maximum": 20
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.stackexchange.com/2.3/questions/hot?order=desc&sort=hot&tagged={{tag}}&site=stackoverflow&filter=WithBody",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["items"]
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Question</th><th>Answers</th></tr></thead><tbody>{{#each items}}<tr><td><a href='{{link}}' target='_blank' style='color: #60a5fa;'>{{title}}</a></td><td style='text-align: center;'><span style='background: #252540; padding: 2px 8px; border-radius: 4px; font-size: 0.85em;'>{{answer_count}}</span></td></tr>{{/each}}</tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

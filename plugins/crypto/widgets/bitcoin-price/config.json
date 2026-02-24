@@ -1,0 +1,31 @@
+{
+  "type": "indicator",
+  "title": "Bitcoin Price",
+  "updateInterval": 60,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "currency": {
+        "type": "string",
+        "enum": ["usd", "eur", "gbp", "rub"],
+        "default": "usd"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies={{currency}}",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$.bitcoin.{{currency}}"
+    }
+  },
+  "template": {
+    "html": "<div style='font-size: 2.5em; font-weight: bold; color: #f7931a;'>${{currency}}: {{bitcoin}}</div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

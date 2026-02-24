@@ -1,0 +1,40 @@
+{
+  "type": "indicator",
+  "title": "Pomodoro",
+  "updateInterval": 1,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "workDuration": {
+        "type": "number",
+        "default": 25,
+        "minimum": 5,
+        "maximum": 60,
+        "description": "Work duration in minutes"
+      },
+      "breakDuration": {
+        "type": "number",
+        "default": 5,
+        "minimum": 1,
+        "maximum": 30,
+        "description": "Break duration in minutes"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://worldtimeapi.org/api/timezone/UTC",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='pomodoro-{{widgetId}}' style='text-align: center;'><div style='font-size: 3.5em; font-weight: bold; font-variant-numeric: tabular-nums; color: #22c55e;'>{{workDuration}}:00</div><div style='color: #888; margin-top: 8px;'>Work Session</div><div style='margin-top: 16px;'><button id='start-{{widgetId}}' style='background: #22c55e; color: white; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-size: 1em;'>Start</button></div></div><script>(function(){const workMin={{workDuration}};const breakMin={{breakDuration}};let isWork=true;let remaining=workMin*60;let running=false;const container=document.getElementById('pomodoro-{{widgetId}}');const timerDisplay=container.querySelector('div:first-child');const statusDisplay=container.querySelector('div:nth-child(2)');const btn=document.getElementById('start-{{widgetId}}');function formatTime(sec){const m=Math.floor(sec/60).toString().padStart(2,'0');const s=(sec%60).toString().padStart(2,'0');return m+':'+s;}function updateDisplay(){timerDisplay.textContent=formatTime(remaining);timerDisplay.style.color=isWork?'#22c55e':'#3b82f6';statusDisplay.textContent=isWork?'Work Session':'Break Time';}btn.addEventListener('click',()=>{if(!running){running=true;btn.textContent='Pause';const interval=setInterval(()=>{remaining--;if(remaining<0){isWork=!isWork;remaining=isWork?workMin*60:breakMin*60;}updateDisplay();},1000);}else{running=false;btn.textContent='Resume';}});})();</script>",
+    "sanitize": false
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

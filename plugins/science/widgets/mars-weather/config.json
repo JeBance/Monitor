@@ -1,0 +1,31 @@
+{
+  "type": "text",
+  "title": "Mars Weather",
+  "updateInterval": 3600,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "apiKey": {
+        "type": "string",
+        "default": "DEMO_KEY",
+        "description": "NASA API key"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.nasa.gov/insight_weather/?api_key={{apiKey}}&feedtype=json&ver=1.0",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='font-size: 3em;'>🔴</div><div style='display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;'><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #f97316;'>{{avg_temp}}°C</div><div style='color: #888; font-size: 0.85em;'>Avg Temp</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #60a5fa;'>{{min_temp}}°C</div><div style='color: #888; font-size: 0.85em;'>Min Temp</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #fbbf24;'>{{max_temp}}°C</div><div style='color: #888; font-size: 0.85em;'>Max Temp</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #9ca3af;'>{{wind_speed}} m/s</div><div style='color: #888; font-size: 0.85em;'>Wind Speed</div></div></div><div style='margin-top: 12px; font-size: 0.85em; color: #666;'>Sol {{sol}} | NASA InSight</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

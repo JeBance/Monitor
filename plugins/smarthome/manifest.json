@@ -1,0 +1,33 @@
+{
+  "id": "smart-home",
+  "name": "Smart Home",
+  "version": "1.0.0",
+  "description": "Smart home monitoring and control",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "weather-indoor",
+      "name": "Indoor Weather",
+      "description": "Indoor temperature and humidity",
+      "icon": "",
+      "configUrl": "widgets/weather-indoor/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "energy-monitor",
+      "name": "Energy Monitor",
+      "description": "Home energy consumption",
+      "icon": "",
+      "configUrl": "widgets/energy-monitor/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "security-cameras",
+      "name": "Security Status",
+      "description": "Home security system status",
+      "icon": "",
+      "configUrl": "widgets/security-cameras/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

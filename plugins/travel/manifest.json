@@ -1,0 +1,33 @@
+{
+  "id": "travel",
+  "name": "Travel",
+  "version": "1.0.0",
+  "description": "Travel and transportation widgets",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "flight-tracker",
+      "name": "Flight Tracker",
+      "description": "Track flight status",
+      "icon": "",
+      "configUrl": "widgets/flight-tracker/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "airport-delays",
+      "name": "Airport Delays",
+      "description": "US airport delay information",
+      "icon": "",
+      "configUrl": "widgets/airport-delays/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "travel-quotes",
+      "name": "Travel Quotes",
+      "description": "Inspirational travel quotes",
+      "icon": "",
+      "configUrl": "widgets/travel-quotes/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

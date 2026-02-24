@@ -1,0 +1,38 @@
+{
+  "type": "table",
+  "title": "Upcoming Holidays",
+  "updateInterval": 86400,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "country": {
+        "type": "string",
+        "default": "US",
+        "enum": ["US", "UK", "CA", "AU", "DE", "FR"],
+        "description": "Country for holidays"
+      },
+      "limit": {
+        "type": "number",
+        "default": 5,
+        "minimum": 3,
+        "maximum": 10
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://date.nager.at/api/v3/NextPublicHolidays/{{country}}",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$[:{{limit}}]"
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Date</th><th>Holiday</th></tr></thead><tbody>{{#each this}}<tr><td style='white-space: nowrap;'>{{date}}</td><td>{{localName}}</td></tr>{{/each}}</tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

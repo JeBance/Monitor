@@ -1,0 +1,33 @@
+{
+  "id": "government",
+  "name": "Government & Public",
+  "version": "1.0.0",
+  "description": "Public services and government data",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "tax-brackets",
+      "name": "Tax Brackets",
+      "description": "Federal income tax brackets",
+      "icon": "",
+      "configUrl": "widgets/tax-brackets/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "us-holidays",
+      "name": "US Holidays",
+      "description": "Upcoming federal holidays",
+      "icon": "",
+      "configUrl": "widgets/us-holidays/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "postal-rates",
+      "name": "Postal Rates",
+      "description": "USPS shipping rates",
+      "icon": "",
+      "configUrl": "widgets/postal-rates/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

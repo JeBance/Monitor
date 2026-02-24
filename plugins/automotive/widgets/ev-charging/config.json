@@ -1,0 +1,43 @@
+{
+  "type": "text",
+  "title": "EV Charging Near Me",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "latitude": {
+        "type": "number",
+        "default": 37.7749,
+        "description": "Your latitude"
+      },
+      "longitude": {
+        "type": "number",
+        "default": -122.4194,
+        "description": "Your longitude"
+      },
+      "radius": {
+        "type": "number",
+        "default": 10,
+        "minimum": 5,
+        "maximum": 50,
+        "description": "Search radius (miles)"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.openchargemap.io/v3/poi/?countrycode=US&latitude={{latitude}}&longitude={{longitude}}&distance={{radius}}&distanceunit=MILE&maxresults=5",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='font-size: 3em;'>⚡</div><div style='margin-top: 16px; text-align: left;'><div style='background: #252540; padding: 12px; border-radius: 8px; margin-bottom: 8px;'><div style='display: flex; justify-content: space-between;'><span style='font-weight: bold; color: #22c55e;'>● ChargePoint #1</span><span style='color: #888;'>0.5 mi</span></div><div style='font-size: 0.85em; color: #aaa; margin-top: 4px;'>2x Level 2 Available</div></div><div style='background: #252540; padding: 12px; border-radius: 8px; margin-bottom: 8px;'><div style='display: flex; justify-content: space-between;'><span style='font-weight: bold; color: #22c55e;'>● Tesla Supercharger</span><span style='color: #888;'>1.2 mi</span></div><div style='font-size: 0.85em; color: #aaa; margin-top: 4px;'>8x DC Fast Available</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='display: flex; justify-content: space-between;'><span style='font-weight: bold; color: #fbbf24;'>● EVgo Station</span><span style='color: #888;'>2.8 mi</span></div><div style='font-size: 0.85em; color: #aaa; margin-top: 4px;'>1x DC Fast In Use</div></div></div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "automotive",
+  "name": "Automotive",
+  "version": "1.0.0",
+  "description": "Car prices, fuel economy, and auto news",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "gas-tracker",
+      "name": "Gas Tracker",
+      "description": "Track fuel prices in your area",
+      "icon": "",
+      "configUrl": "widgets/gas-tracker/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "car-values",
+      "name": "Car Values",
+      "description": "Vehicle resale values",
+      "icon": "",
+      "configUrl": "widgets/car-values/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "ev-charging",
+      "name": "EV Charging",
+      "description": "Nearby EV charging stations",
+      "icon": "",
+      "configUrl": "widgets/ev-charging/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

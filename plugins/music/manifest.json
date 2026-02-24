@@ -1,0 +1,33 @@
+{
+  "id": "music",
+  "name": "Music",
+  "version": "1.0.0",
+  "description": "Music charts and streaming stats",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "spotify-top",
+      "name": "Spotify Top 50",
+      "description": "Top 50 tracks on Spotify",
+      "icon": "",
+      "configUrl": "widgets/spotify-top/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "itunes-chart",
+      "name": "iTunes Chart",
+      "description": "Top songs on iTunes",
+      "icon": "",
+      "configUrl": "widgets/itunes-chart/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "song-lyrics",
+      "name": "Song Lyrics",
+      "description": "Lyrics of the day",
+      "icon": "",
+      "configUrl": "widgets/song-lyrics/config.json",
+      "sizes": ["medium"]
+    }
+  ]
+}

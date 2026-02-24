@@ -1,0 +1,33 @@
+{
+  "id": "crypto-news",
+  "name": "Crypto News",
+  "version": "1.0.0",
+  "description": "Cryptocurrency news and updates",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "crypto-headlines",
+      "name": "Crypto Headlines",
+      "description": "Latest cryptocurrency news",
+      "icon": "",
+      "configUrl": "widgets/crypto-headlines/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "whale-alerts",
+      "name": "Whale Alerts",
+      "description": "Large crypto transactions",
+      "icon": "",
+      "configUrl": "widgets/whale-alerts/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "ico-calendar",
+      "name": "ICO Calendar",
+      "description": "Upcoming token sales",
+      "icon": "",
+      "configUrl": "widgets/ico-calendar/config.json",
+      "sizes": ["medium"]
+    }
+  ]
+}

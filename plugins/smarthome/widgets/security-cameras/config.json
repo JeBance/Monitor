@@ -1,0 +1,31 @@
+{
+  "type": "text",
+  "title": "Security Status",
+  "updateInterval": 60,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "cameras": {
+        "type": "string",
+        "default": "Front Door,Back Yard,Garage,Driveway",
+        "description": "Comma-separated camera names"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://worldtimeapi.org/api/timezone/UTC",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='security-{{widgetId}}' style='text-align: center;'><div style='font-size: 3em; margin-bottom: 16px;' id='status-icon-{{widgetId}}'>🔒</div><div style='font-size: 1.2em; font-weight: bold; color: #22c55e;' id='status-text-{{widgetId}}'>System Armed</div><div style='margin-top: 16px; text-align: left;'><div style='font-size: 0.85em; color: #888; margin-bottom: 8px;'>Cameras Online:</div>{{#each cameras}}<div style='display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #333; font-size: 0.9em;'><span>{{this}}</span><span style='color: #22c55e;'>● Live</span></div>{{/each}}</div><button id='toggle-{{widgetId}}' style='margin-top: 16px; padding: 10px 24px; background: #dc2626; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9em;'>Disarm System</button></div><script>(function(){let armed=true;const btn=document.getElementById('toggle-{{widgetId}}');const icon=document.getElementById('status-icon-{{widgetId}}');const text=document.getElementById('status-text-{{widgetId}}');btn.addEventListener('click',()=>{armed=!armed;if(armed){icon.textContent='🔒';text.textContent='System Armed';text.style.color='#22c55e';btn.textContent='Disarm System';btn.style.background='#dc2626';}else{icon.textContent='🔓';text.textContent='System Disarmed';text.style.color='#888';btn.textContent='Arm System';btn.style.background='#22c55e';}});})();</script>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

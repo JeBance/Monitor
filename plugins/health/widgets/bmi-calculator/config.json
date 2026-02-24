@@ -1,0 +1,36 @@
+{
+  "type": "text",
+  "title": "BMI Calculator",
+  "updateInterval": 0,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "height": {
+        "type": "number",
+        "default": 175,
+        "description": "Height in cm"
+      },
+      "weight": {
+        "type": "number",
+        "default": 70,
+        "description": "Weight in kg"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://worldtimeapi.org/api/timezone/UTC",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='bmi-{{widgetId}}' style='text-align: center;'><div style='font-size: 3em; font-weight: bold; color: {{color}};'>{{bmi}}</div><div style='color: #888; margin-top: 8px;'>{{category}}</div><div style='margin-top: 16px; padding: 12px; background: #252540; border-radius: 8px;'><div style='display: flex; justify-content: space-between; margin-bottom: 8px;'><span style='color: #aaa;'>Height:</span><span>{{height}} cm</span></div><div style='display: flex; justify-content: space-between;'><span style='color: #aaa;'>Weight:</span><span>{{weight}} kg</span></div></div></div><script>(function(){const height={{height}}/100;const weight={{weight}};const bmi=(weight/(height*height)).toFixed(1);let category,colour;if(bmi<18.5){category='Underweight';colour='#60a5fa';}else if(bmi<25){category='Normal';colour='#22c55e';}else if(bmi<30){category='Overweight';colour='#fbbf24';}else{category='Obese';colour='#ef4444';}const container=document.getElementById('bmi-{{widgetId}}');container.innerHTML=container.innerHTML.replace('{{bmi}}',bmi).replace('{{category}}',category).replace('{{color}}',colour).replace('{{height}}',{{height}}).replace('{{weight}}',{{weight}});})();</script>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

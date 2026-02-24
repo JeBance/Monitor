@@ -1,0 +1,33 @@
+{
+  "id": "senior-care",
+  "name": "Senior Care",
+  "version": "1.0.0",
+  "description": "Senior health and care management",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "medication-reminder",
+      "name": "Medication Reminder",
+      "description": "Medication schedule tracker",
+      "icon": "",
+      "configUrl": "widgets/medication-reminder/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "health-metrics",
+      "name": "Health Metrics",
+      "description": "Track vital signs",
+      "icon": "",
+      "configUrl": "widgets/health-metrics/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "memory-games",
+      "name": "Memory Games",
+      "description": "Cognitive exercises",
+      "icon": "",
+      "configUrl": "widgets/memory-games/config.json",
+      "sizes": ["small", "medium"]
+    }
+  ]
+}

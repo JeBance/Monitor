@@ -1,0 +1,32 @@
+{
+  "type": "table",
+  "title": "Market Indices",
+  "updateInterval": 120,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "indices": {
+        "type": "string",
+        "enum": ["us", "europe", "asia", "all"],
+        "default": "us",
+        "description": "Region selection"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5ESPX?range=1d&interval=1m",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "SPX: {{chart.result.0.meta.regularMarketPrice}}"
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Index</th><th>Price</th><th>Change</th></tr></thead><tbody><tr><td>S&P 500</td><td>{{chart.result.0.meta.regularMarketPrice}}</td><td style='color: {{#if gte chart.result.0.meta.regularMarketChange 0}}#22c55e{{else}}#ef4444{{/if}};'>{{chart.result.0.meta.regularMarketChange}}</td></tr></tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

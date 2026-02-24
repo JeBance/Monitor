@@ -1,0 +1,33 @@
+{
+  "type": "text",
+  "title": "Step Counter",
+  "updateInterval": 0,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "goal": {
+        "type": "number",
+        "default": 10000,
+        "minimum": 5000,
+        "maximum": 20000,
+        "description": "Daily step goal"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://worldtimeapi.org/api/timezone/UTC",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='steps-{{widgetId}}' style='text-align: center;'><div style='font-size: 3em;'>👟</div><div style='font-size: 2.5em; font-weight: bold; color: #22c55e; margin: 16px 0;'><span id='steps-count-{{widgetId}}'>0</span></div><div style='color: #888; margin-bottom: 12px;'>/ {{goal}} steps</div><div style='background: #252540; border-radius: 8px; height: 12px; overflow: hidden;'><div id='progress-{{widgetId}}' style='background: linear-gradient(90deg, #22c55e, #60a5fa); height: 100%; width: 0%; transition: width 0.3s;'></div></div><div style='margin-top: 16px;'><input type='number' id='steps-input-{{widgetId}}' placeholder='Add steps' style='background: #252540; border: 1px solid #333; color: #e0e0e0; padding: 8px; border-radius: 6px; width: 120px;' /><button id='add-{{widgetId}}' style='background: #22c55e; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-left: 8px;'>Add</button></div></div><script>(function(){const key='steps-{{widgetId}}';const goal={{goal}};const today=new Date().toDateString();let steps=parseInt(localStorage.getItem(key)||'0');const storedDate=localStorage.getItem(key+'-date');if(storedDate!==today){steps=0;localStorage.setItem(key,'0');localStorage.setItem(key+'-date',today);}function render(){document.getElementById('steps-count-{{widgetId}}').textContent=steps.toLocaleString();const pct=Math.min((steps/goal)*100,100);document.getElementById('progress-{{widgetId}}').style.width=pct+'%';}document.getElementById('add-{{widgetId}}').addEventListener('click',()=>{const input=document.getElementById('steps-input-{{widgetId}}');const add=parseInt(input.value)||0;if(add>0){steps+=add;localStorage.setItem(key,steps.toString());input.value='';render();}});render();})();</script>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

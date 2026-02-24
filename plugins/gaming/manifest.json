@@ -1,0 +1,41 @@
+{
+  "id": "gaming",
+  "name": "Gaming",
+  "version": "1.0.0",
+  "description": "Gaming news, stats, and deals",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "steam-deals",
+      "name": "Steam Deals",
+      "description": "Top deals on Steam",
+      "icon": "",
+      "configUrl": "widgets/steam-deals/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "twitch-channels",
+      "name": "Twitch Channels",
+      "description": "Live status of favorite streamers",
+      "icon": "",
+      "configUrl": "widgets/twitch-channels/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "gaming-news",
+      "name": "Gaming News",
+      "description": "Latest gaming news",
+      "icon": "",
+      "configUrl": "widgets/gaming-news/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "speedrun-records",
+      "name": "Speedrun Records",
+      "description": "World records for your favorite games",
+      "icon": "",
+      "configUrl": "widgets/speedrun-records/config.json",
+      "sizes": ["medium"]
+    }
+  ]
+}

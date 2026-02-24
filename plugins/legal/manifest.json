@@ -1,0 +1,33 @@
+{
+  "id": "legal",
+  "name": "Legal & Compliance",
+  "version": "1.0.0",
+  "description": "Legal information and compliance tracking",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "court-dates",
+      "name": "Court Dates",
+      "description": "Upcoming court schedule",
+      "icon": "",
+      "configUrl": "widgets/court-dates/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "law-updates",
+      "name": "Law Updates",
+      "description": "Recent legal changes",
+      "icon": "",
+      "configUrl": "widgets/law-updates/config.json",
+      "sizes": ["medium", "large"]
+    },
+    {
+      "id": "compliance-tracker",
+      "name": "Compliance Tracker",
+      "description": "Regulatory compliance status",
+      "icon": "",
+      "configUrl": "widgets/compliance-tracker/config.json",
+      "sizes": ["medium"]
+    }
+  ]
+}

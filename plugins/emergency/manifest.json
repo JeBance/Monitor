@@ -1,0 +1,33 @@
+{
+  "id": "emergency",
+  "name": "Emergency Services",
+  "version": "1.0.0",
+  "description": "Emergency contacts and safety information",
+  "author": "Monitor Team",
+  "widgets": [
+    {
+      "id": "emergency-contacts",
+      "name": "Emergency Contacts",
+      "description": "Quick access to emergency numbers",
+      "icon": "",
+      "configUrl": "widgets/emergency-contacts/config.json",
+      "sizes": ["small", "medium"]
+    },
+    {
+      "id": "weather-alerts",
+      "name": "Weather Alerts",
+      "description": "Severe weather warnings",
+      "icon": "",
+      "configUrl": "widgets/weather-alerts/config.json",
+      "sizes": ["medium"]
+    },
+    {
+      "id": "first-aid",
+      "name": "First Aid Guide",
+      "description": "Quick first aid reference",
+      "icon": "",
+      "configUrl": "widgets/first-aid/config.json",
+      "sizes": ["medium", "large"]
+    }
+  ]
+}

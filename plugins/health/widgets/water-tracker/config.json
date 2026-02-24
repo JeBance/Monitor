@@ -1,0 +1,33 @@
+{
+  "type": "indicator",
+  "title": "Water Tracker",
+  "updateInterval": 0,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "goal": {
+        "type": "number",
+        "default": 8,
+        "minimum": 4,
+        "maximum": 20,
+        "description": "Daily goal (glasses)"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://worldtimeapi.org/api/timezone/UTC",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div id='water-{{widgetId}}' style='text-align: center;'><div style='font-size: 3em;'>💧</div><div id='glasses-{{widgetId}}' style='margin: 16px 0; font-size: 1.5em;'><span style='color: #60a5fa;'>●</span> <span style='color: #333;'>○</span> <span style='color: #333;'>○</span> <span style='color: #333;'>○</span> <span style='color: #333;'>○</span> <span style='color: #333;'>○</span> <span style='color: #333;'>○</span> <span style='color: #333;'>○</span></div><div style='font-size: 1.2em; font-weight: bold;'><span id='count-{{widgetId}}'>0</span> / {{goal}} glasses</div><div style='margin-top: 12px;'><button id='add-{{widgetId}}' style='background: #60a5fa; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;'>+ Add Glass</button></div></div><script>(function(){const key='water-{{widgetId}}';const goal={{goal}};const today=new Date().toDateString();let count=parseInt(localStorage.getItem(key)||'0');const storedDate=localStorage.getItem(key+'-date');if(storedDate!==today){count=0;localStorage.setItem(key,'0');localStorage.setItem(key+'-date',today);}function render(){let glasses='';for(let i=0;i<goal;i++){glasses+='<span style=\"color:'+(i<count?'#60a5fa':'#333')+';\">● </span>';}document.getElementById('glasses-{{widgetId}}').innerHTML=glasses;document.getElementById('count-{{widgetId}}').textContent=count;}document.getElementById('add-{{widgetId}}').addEventListener('click',()=>{if(count<goal){count++;localStorage.setItem(key,count.toString());render();}});render();})();</script>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

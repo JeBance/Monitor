@@ -1,0 +1,35 @@
+{
+  "type": "table",
+  "title": "Twitch Streamers",
+  "updateInterval": 120,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "channels": {
+        "type": "string",
+        "default": "shroud,ninja,summit1g",
+        "description": "Comma-separated channel names"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.twitch.tv/helix/streams?user_login={{channels}}",
+    "method": "GET",
+    "headers": {
+      "Client-ID": "{{clientId}}",
+      "Authorization": "Bearer {{token}}"
+    },
+    "transform": {
+      "type": "pick",
+      "fields": ["data"]
+    }
+  },
+  "template": {
+    "html": "<table><thead><tr><th>Channel</th><th>Game</th><th>Viewers</th></tr></thead><tbody>{{#each data}}<tr><td><a href='https://twitch.tv/{{user_name}}' target='_blank' style='color: #a855f7;'>{{user_name}}</a></td><td>{{game_name}}</td><td>{{viewer_count}}</td></tr>{{/each}}{{#unless data.length}}<tr><td colspan='3' style='text-align: center; color: #888;'>No channels currently live</td></tr>{{/unless}}</tbody></table>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

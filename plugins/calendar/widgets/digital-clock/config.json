@@ -1,0 +1,42 @@
+{
+  "type": "indicator",
+  "title": "Clock",
+  "updateInterval": 1,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "format": {
+        "type": "string",
+        "enum": ["12h", "24h"],
+        "default": "24h",
+        "description": "Time format"
+      },
+      "showSeconds": {
+        "type": "boolean",
+        "default": true,
+        "description": "Show seconds"
+      },
+      "timezone": {
+        "type": "string",
+        "default": "local",
+        "description": "Timezone (e.g., America/New_York)"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://worldtimeapi.org/api/timezone/{{timezone}}",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["datetime", "timezone", "utc_offset"]
+    }
+  },
+  "template": {
+    "html": "<div id='clock-{{widgetId}}' style='text-align: center;'><div style='font-size: 3.5em; font-weight: bold; font-variant-numeric: tabular-nums; letter-spacing: 2px;'>--:--:--</div><div style='color: #888; margin-top: 8px;'>{{timezone}}</div></div><script>(function(){function updateClock(){const now=new Date();const options={hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:{{format}}==='12h'};document.getElementById('clock-{{widgetId}}').querySelector('div:first-child').textContent=now.toLocaleTimeString('en-US',options);}updateClock();setInterval(updateClock,1000);})();</script>",
+    "sanitize": false
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

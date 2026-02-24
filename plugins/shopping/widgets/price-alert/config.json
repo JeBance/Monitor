@@ -1,0 +1,36 @@
+{
+  "type": "indicator",
+  "title": "Price Alert: {{product}}",
+  "updateInterval": 300,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {
+      "product": {
+        "type": "string",
+        "default": "PS5 Console",
+        "description": "Product name"
+      },
+      "targetPrice": {
+        "type": "number",
+        "default": 450,
+        "description": "Target price alert threshold"
+      }
+    }
+  },
+  "dataSource": {
+    "url": "https://api.camelcamelcamel.com/products/{{product}}",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='font-size: 3em;'>🔔</div><div style='font-size: 2em; font-weight: bold; color: {{#if lte current targetPrice}}#22c55e{{else}}#fbbf24{{/if}}; margin-top: 12px;'>${{current}}</div><div style='color: #888; margin-top: 8px;'>Target: ${{targetPrice}}</div><div style='margin-top: 12px; padding: 8px; background: {{#if lte current targetPrice}}#22c55e20{{else}}#fbbf2420{{/if}}; border-radius: 6px; font-size: 0.9em; color: {{#if lte current targetPrice}}#22c55e{{else}}#fbbf24{{/if}};'>{{#if lte current targetPrice}}✓ Price Alert!{{else}}⏳ Waiting for drop{{/if}}</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

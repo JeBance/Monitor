@@ -1,0 +1,25 @@
+{
+  "type": "text",
+  "title": "ISS Location",
+  "updateInterval": 10,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {}
+  },
+  "dataSource": {
+    "url": "https://api.wheretheiss.at/v1/satellites/25544",
+    "method": "GET",
+    "transform": {
+      "type": "pick",
+      "fields": ["latitude", "longitude", "altitude", "velocity", "visibility"]
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='font-size: 3em;'>🛰️</div><div style='display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;'><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #60a5fa;'>{{latitude}}°</div><div style='color: #888; font-size: 0.85em;'>Latitude</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #22c55e;'>{{longitude}}°</div><div style='color: #888; font-size: 0.85em;'>Longitude</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #fbbf24;'>{{altitude}} km</div><div style='color: #888; font-size: 0.85em;'>Altitude</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #f97316;'>{{velocity}} km/h</div><div style='color: #888; font-size: 0.85em;'>Velocity</div></div></div><div style='margin-top: 12px; padding: 8px; background: {{#if eq visibility \"daylight\"}}#fbbf2420{{else}}#6366f120{{/if}}; border-radius: 6px; font-size: 0.9em; color: {{#if eq visibility \"daylight\"}}#fbbf24{{else}}#6366f1{{/if}};'>{{#if eq visibility \"daylight\"}}☀️ In Daylight{{else}}🌙 In Eclipse{{/if}}</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "text",
+  "title": "USPS Postal Rates",
+  "updateInterval": 0,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {}
+  },
+  "dataSource": {
+    "url": "https://www.usps.com/",
+    "method": "GET",
+    "transform": {
+      "type": "format",
+      "format": "sync"
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center;'><div style='display: grid; grid-template-columns: 1fr 1fr; gap: 12px;'><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #3b82f6;'>$0.68</div><div style='color: #888; font-size: 0.85em;'>First-Class Letter</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #22c55e;'>$1.45</div><div style='color: #888; font-size: 0.85em;'>Postcard</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #fbbf24;'>$9.65</div><div style='color: #888; font-size: 0.85em;'>Priority Mail</div></div><div style='background: #252540; padding: 12px; border-radius: 8px;'><div style='font-size: 1.5em; font-weight: bold; color: #f97316;'>$31.40</div><div style='color: #888; font-size: 0.85em;'>Priority Express</div></div></div><div style='margin-top: 12px; font-size: 0.75em; color: #666;'>Rates as of 2024</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}

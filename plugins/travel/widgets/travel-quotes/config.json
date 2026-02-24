@@ -1,0 +1,25 @@
+{
+  "type": "text",
+  "title": "Travel Quote",
+  "updateInterval": 86400,
+  "settingsSchema": {
+    "type": "object",
+    "properties": {}
+  },
+  "dataSource": {
+    "url": "https://type.fit/api/quotes",
+    "method": "GET",
+    "transform": {
+      "type": "jsonpath",
+      "expression": "$[0]"
+    }
+  },
+  "template": {
+    "html": "<div style='text-align: center; padding: 20px;'><div style='font-size: 2em; margin-bottom: 12px;'>✈️</div><div style='font-size: 1.2em; font-style: italic; color: #e0e0e0; line-height: 1.6;'>\"The world is a book and those who do not travel read only one page.\"</div><div style='margin-top: 16px; color: #888; font-size: 0.9em;'>— Saint Augustine</div></div>",
+    "sanitize": true
+  },
+  "styles": {
+    "backgroundColor": "#1e1e2e",
+    "borderRadius": "12px"
+  }
+}
