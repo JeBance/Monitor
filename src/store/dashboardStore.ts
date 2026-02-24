@@ -1,13 +1,13 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { DashboardWidget, WidgetLayout, DashboardState } from '../types'
+import { DashboardWidget, WidgetLayout, DashboardState, PluginManifest } from '../types'
 import { loadPluginManifest, loadWidgetConfig, fetchWidgetData } from '../core'
 
 interface DashboardActions {
   // Плагины
   addPlugin: (manifestUrl: string) => Promise<void>
   removePlugin: (pluginId: string) => void
-  
+
   // Виджеты
   addWidget: (pluginId: string, widgetId: string, layout: WidgetLayout) => Promise<void>
   removeWidget: (widgetId: string) => void
@@ -15,12 +15,17 @@ interface DashboardActions {
   updateWidgetLayout: (layouts: WidgetLayout[]) => void
   refreshWidget: (widgetId: string) => Promise<void>
   selectWidget: (widgetId: string | null) => void
-  
+
   // Состояние
   loadState: () => void
   exportState: () => string
   importState: (json: string) => Promise<void>
   toggleEditMode: () => void
+}
+
+// Расширенный тип плагина с baseUrl
+interface PluginWithBase extends PluginManifest {
+  baseUrl: string
 }
 
 const initialState: DashboardState = {
@@ -39,15 +44,19 @@ export const useDashboardStore = create<DashboardState & DashboardActions>()(
       // Плагины
       addPlugin: async (manifestUrl: string) => {
         const manifest = await loadPluginManifest(manifestUrl)
-        
+
         // Проверка на дубликат
         const existing = get().plugins.find(p => p.id === manifest.id)
         if (existing) {
           throw new Error(`Plugin "${manifest.name}" is already installed`)
         }
-        
+
+        // Вычисляем базовый URL для загрузки конфигов
+        const baseUrl = manifestUrl.substring(0, manifestUrl.lastIndexOf('/') + 1)
+
+        // Добавляем плагин с baseUrl
         set(state => ({
-          plugins: [...state.plugins, manifest],
+          plugins: [...state.plugins, { ...manifest, baseUrl } as PluginWithBase],
         }))
       },
 
@@ -61,7 +70,7 @@ export const useDashboardStore = create<DashboardState & DashboardActions>()(
       // Виджеты
       addWidget: async (pluginId: string, widgetId: string, layout: WidgetLayout) => {
         const state = get()
-        const plugin = state.plugins.find(p => p.id === pluginId)
+        const plugin = state.plugins.find(p => p.id === pluginId) as PluginWithBase | undefined
         if (!plugin) {
           throw new Error(`Plugin "${pluginId}" not found`)
         }
@@ -71,10 +80,10 @@ export const useDashboardStore = create<DashboardState & DashboardActions>()(
           throw new Error(`Widget "${widgetId}" not found in plugin`)
         }
 
-        // Загружаем конфиг виджета
+        // Загружаем конфиг виджета с baseUrl
         const config = await loadWidgetConfig(
           widgetManifest.configUrl,
-          ''
+          plugin.baseUrl
         )
 
         const newWidget: DashboardWidget = {
