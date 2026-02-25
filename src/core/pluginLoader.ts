@@ -4,7 +4,21 @@ import { pluginManifestSchema, widgetConfigSchema } from '../schemas'
 // Простая валидация JSON Schema без Ajv (для CSP совместимости)
 // Ajv генерирует код через new Function, что нарушает CSP
 
-function validateSchema(data: any, schema: any): { valid: boolean; errors?: any[] } {
+interface SchemaValidationResult {
+  valid: boolean
+  errors?: Array<{ message: string }>
+}
+
+interface SchemaType {
+  type?: string
+  required?: string[]
+  properties?: Record<string, unknown>
+  items?: unknown
+  enum?: unknown[]
+  pattern?: string
+}
+
+function validateSchema(data: unknown, schema: SchemaType): SchemaValidationResult {
   // Базовая валидация типов
   if (schema.type === 'object' && typeof data !== 'object') {
     return { valid: false, errors: [{ message: 'must be object' }] }
@@ -21,21 +35,21 @@ function validateSchema(data: any, schema: any): { valid: boolean; errors?: any[
   if (schema.type === 'boolean' && typeof data !== 'boolean') {
     return { valid: false, errors: [{ message: 'must be boolean' }] }
   }
-  
+
   // Проверка required
   if (schema.required && Array.isArray(schema.required)) {
     for (const prop of schema.required) {
-      if (!(prop in data)) {
+      if (!(prop in (data as Record<string, unknown>))) {
         return { valid: false, errors: [{ message: `missing required: ${prop}` }] }
       }
     }
   }
-  
+
   // Проверка enum
-  if (schema.enum && !schema.enum.includes(data)) {
+  if (schema.enum && !schema.enum.includes(data as string)) {
     return { valid: false, errors: [{ message: 'must be one of enum values' }] }
   }
-  
+
   // Проверка pattern
   if (schema.pattern && typeof data === 'string') {
     const regex = new RegExp(schema.pattern)
@@ -43,34 +57,34 @@ function validateSchema(data: any, schema: any): { valid: boolean; errors?: any[
       return { valid: false, errors: [{ message: `must match pattern: ${schema.pattern}` }] }
     }
   }
-  
+
   // Рекурсивная проверка свойств объекта
   if (schema.type === 'object' && schema.properties) {
     for (const [key, propSchema] of Object.entries(schema.properties)) {
-      if (key in data) {
-        const result = validateSchema(data[key], propSchema)
+      if (key in (data as Record<string, unknown>)) {
+        const result = validateSchema((data as Record<string, unknown>)[key], propSchema as SchemaType)
         if (!result.valid) return result
       }
     }
   }
-  
+
   // Проверка элементов массива
   if (schema.type === 'array' && schema.items) {
-    for (const item of data) {
-      const result = validateSchema(item, schema.items)
+    for (const item of data as unknown[]) {
+      const result = validateSchema(item, schema.items as SchemaType)
       if (!result.valid) return result
     }
   }
-  
+
   return { valid: true }
 }
 
-export function validateManifest(manifest: PluginManifest): { valid: boolean; errors?: any[] } {
-  return validateSchema(manifest, pluginManifestSchema)
+export function validateManifest(manifest: PluginManifest): SchemaValidationResult {
+  return validateSchema(manifest, pluginManifestSchema as SchemaType)
 }
 
-export function validateConfig(config: WidgetConfig): { valid: boolean; errors?: any[] } {
-  return validateSchema(config, widgetConfigSchema)
+export function validateConfig(config: WidgetConfig): SchemaValidationResult {
+  return validateSchema(config, widgetConfigSchema as SchemaType)
 }
 
 export class PluginError extends Error {

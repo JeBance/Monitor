@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import ReactGridLayout from 'react-grid-layout'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
@@ -8,7 +8,15 @@ import WidgetSettings from './WidgetSettings'
 import './Dashboard.css'
 
 export default function Dashboard() {
-  const { widgets, layouts, updateWidgetLayout, selectWidget, selectedWidgetId, isEditing } = useDashboardStore()
+  const { widgets, layouts, updateWidgetLayout, selectWidget, selectedWidgetId, isEditing, startAutoRefresh, stopAutoRefresh } = useDashboardStore()
+  const startAutoRefreshRef = useRef(startAutoRefresh)
+  const stopAutoRefreshRef = useRef(stopAutoRefresh)
+
+  // Обновляем рефы при изменении функций
+  useEffect(() => {
+    startAutoRefreshRef.current = startAutoRefresh
+    stopAutoRefreshRef.current = stopAutoRefresh
+  }, [startAutoRefresh, stopAutoRefresh])
 
   const handleLayoutChange = useCallback((newLayout: ReactGridLayout.Layout[]) => {
     updateWidgetLayout(newLayout.map(l => ({
@@ -31,6 +39,32 @@ export default function Dashboard() {
   const handleCloseSettings = useCallback(() => {
     selectWidget(null)
   }, [selectWidget])
+
+  // Запуск автообновления при изменении виджетов
+  useEffect(() => {
+    if (widgets.length > 0) {
+      startAutoRefreshRef.current()
+    }
+    return () => {
+      stopAutoRefreshRef.current()
+    }
+  }, [widgets.length])
+
+  // Остановка автообновления в режиме редактирования
+  useEffect(() => {
+    if (isEditing) {
+      stopAutoRefreshRef.current()
+    } else if (widgets.length > 0) {
+      startAutoRefreshRef.current()
+    }
+  }, [isEditing, widgets.length])
+
+  // Очистка интервалов при размонтировании
+  useEffect(() => {
+    return () => {
+      stopAutoRefreshRef.current()
+    }
+  }, [])
 
   if (widgets.length === 0) {
     return (

@@ -2,7 +2,7 @@ import { WidgetConfig } from '../types'
 import { transformData, isSafeUrl } from './templateEngine'
 
 export class DataFetchError extends Error {
-  constructor(message: string) {
+  constructor(message: string, public isCorsError?: boolean) {
     super(message)
     this.name = 'DataFetchError'
   }
@@ -47,6 +47,13 @@ export async function fetchWidgetData(
   } catch (error) {
     if (error instanceof DataFetchError) {
       throw error
+    }
+    // Проверка на CORS ошибку
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      throw new DataFetchError(
+        `CORS error: Cannot access "${url}". The API server must support CORS headers.`,
+        true
+      )
     }
     throw new DataFetchError(`Fetch failed: ${error instanceof Error ? error.message : 'Unknown error'}`)
   }

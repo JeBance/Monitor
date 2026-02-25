@@ -3,6 +3,8 @@ import { useDashboardStore } from './store/dashboardStore'
 import Dashboard from './components/Dashboard'
 import Sidebar from './components/Sidebar'
 import PluginManager from './components/PluginManager'
+import ToastContainer from './components/ToastContainer'
+import './App.css'
 
 function App() {
   const { loadState } = useDashboardStore()
@@ -12,12 +14,18 @@ function App() {
   }, [loadState])
 
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
-      <Sidebar />
-      <main style={{ flex: 1, overflow: 'auto', padding: '20px' }}>
-        <PluginManager />
-        <Dashboard />
-      </main>
+    <div className="app">
+      <ToastContainer />
+      <header className="app-header">
+        <h1 className="app-logo">Monitor</h1>
+      </header>
+      <div className="app-body">
+        <Sidebar />
+        <main className="app-main">
+          <PluginManager />
+          <Dashboard />
+        </main>
+      </div>
     </div>
   )
 }

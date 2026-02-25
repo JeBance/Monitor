@@ -44,6 +44,11 @@
   margin-bottom: 8px;
 }
 
+.plugin-actions {
+  display: flex;
+  gap: 6px;
+}
+
 .plugin-header h3 {
   font-size: 1rem;
   margin: 0;

@@ -13,6 +13,7 @@ interface DashboardActions {
   // Плагины
   addPlugin: (manifestUrl: string) => Promise<void>
   removePlugin: (pluginId: string) => void
+  updatePlugin: (pluginId: string) => Promise<void>
 
   // Виджеты
   addWidget: (pluginId: string, widgetId: string, layout: WidgetLayout) => Promise<void>
@@ -27,6 +28,10 @@ interface DashboardActions {
   exportState: () => string
   importState: (json: string) => Promise<void>
   toggleEditMode: () => void
+
+  // Автообновление
+  startAutoRefresh: () => void
+  stopAutoRefresh: () => void
 }
 
 const initialState: DashboardState = {
@@ -36,6 +41,9 @@ const initialState: DashboardState = {
   selectedWidgetId: null,
   isEditing: false,
 }
+
+// Хранилище для интервалов обновления
+const refreshIntervals: Map<string, number> = new Map()
 
 export const useDashboardStore = create<DashboardState & DashboardActions>()(
   persist(
@@ -62,9 +70,46 @@ export const useDashboardStore = create<DashboardState & DashboardActions>()(
       },
 
       removePlugin: (pluginId: string) => {
+        // Останавливаем автообновление для всех виджетов плагина
+        const widgets = get().widgets.filter(w => w.pluginId === pluginId)
+        widgets.forEach(w => {
+          if (refreshIntervals.has(w.id)) {
+            const intervalId = refreshIntervals.get(w.id)
+            if (intervalId) {
+              window.clearInterval(intervalId)
+            }
+            refreshIntervals.delete(w.id)
+          }
+        })
+
         set(state => ({
           plugins: state.plugins.filter(p => p.id !== pluginId),
           widgets: state.widgets.filter(w => w.pluginId !== pluginId),
+        }))
+      },
+
+      updatePlugin: async (pluginId: string) => {
+        const state = get()
+        const plugin = state.plugins.find(p => p.id === pluginId) as PluginWithBase | undefined
+        if (!plugin) {
+          throw new Error(`Plugin "${pluginId}" not found`)
+        }
+
+        // Загружаем свежий манифест
+        const newManifest = await loadPluginManifest(plugin.manifestUrl)
+
+        // Проверяем, есть ли обновления
+        if (newManifest.version === plugin.version) {
+          throw new Error('No updates available')
+        }
+
+        // Обновляем плагин с новыми виджетами
+        set(state => ({
+          plugins: state.plugins.map(p =>
+            p.id === pluginId
+              ? { ...newManifest, baseUrl: plugin.baseUrl, manifestUrl: plugin.manifestUrl } as PluginWithBase
+              : p
+          ),
         }))
       },
 
@@ -119,16 +164,16 @@ export const useDashboardStore = create<DashboardState & DashboardActions>()(
         try {
           const data = await fetchWidgetData(config, defaultSettings)
           set(state => ({
-            widgets: state.widgets.map(w => 
-              w.id === newWidget.id 
+            widgets: state.widgets.map(w =>
+              w.id === newWidget.id
                 ? { ...w, data, lastUpdate: Date.now() }
                 : w
             ),
           }))
         } catch (error) {
           set(state => ({
-            widgets: state.widgets.map(w => 
-              w.id === newWidget.id 
+            widgets: state.widgets.map(w =>
+              w.id === newWidget.id
                 ? { ...w, error: error instanceof Error ? error.message : 'Failed to fetch data' }
                 : w
             ),
@@ -137,6 +182,15 @@ export const useDashboardStore = create<DashboardState & DashboardActions>()(
       },
 
       removeWidget: (widgetId: string) => {
+        // Останавливаем автообновление для виджета
+        if (refreshIntervals.has(widgetId)) {
+          const intervalId = refreshIntervals.get(widgetId)
+          if (intervalId) {
+            window.clearInterval(intervalId)
+          }
+          refreshIntervals.delete(widgetId)
+        }
+
         set(state => ({
           widgets: state.widgets.filter(w => w.id !== widgetId),
           layouts: state.layouts.filter(l => l.i !== widgetId),
@@ -216,13 +270,42 @@ export const useDashboardStore = create<DashboardState & DashboardActions>()(
             widgets: parsed.widgets || [],
             layouts: parsed.layouts || [],
           })
-        } catch (error) {
+        } catch {
           throw new Error('Invalid state JSON')
         }
       },
 
       toggleEditMode: () => {
         set(state => ({ isEditing: !state.isEditing }))
+      },
+
+      // Автообновление
+      startAutoRefresh: () => {
+        const { widgets, refreshWidget } = get()
+
+        // Очищаем существующие интервалы
+        refreshIntervals.forEach((intervalId) => {
+          window.clearInterval(intervalId)
+        })
+        refreshIntervals.clear()
+
+        // Создаём интервалы для виджетов с updateInterval > 0
+        widgets.forEach((widget) => {
+          const intervalSeconds = widget.config.updateInterval
+          if (intervalSeconds && intervalSeconds > 0) {
+            const intervalId = window.setInterval(() => {
+              refreshWidget(widget.id)
+            }, intervalSeconds * 1000)
+            refreshIntervals.set(widget.id, intervalId)
+          }
+        })
+      },
+
+      stopAutoRefresh: () => {
+        refreshIntervals.forEach((intervalId) => {
+          window.clearInterval(intervalId)
+        })
+        refreshIntervals.clear()
       },
     }),
     {
