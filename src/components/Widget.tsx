@@ -9,6 +9,17 @@ interface WidgetProps {
 export default function Widget({ widget }: WidgetProps) {
   const { config, data, error, settings } = widget
 
+  // Проверка на случай если конфиг не загрузился
+  if (!config) {
+    return (
+      <div className="widget widget-error">
+        <div className="widget-content">
+          <p className="error-message">⚠ Config not loaded</p>
+        </div>
+      </div>
+    )
+  }
+
   if (error) {
     return (
       <div className="widget widget-error" style={config.styles}>
@@ -34,7 +45,7 @@ export default function Widget({ widget }: WidgetProps) {
           </span>
         )}
       </div>
-      <div 
+      <div
         className="widget-content"
         dangerouslySetInnerHTML={{ __html: content }}
       />
