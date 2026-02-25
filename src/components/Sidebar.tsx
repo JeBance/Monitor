@@ -1,8 +1,12 @@
+import { useRef } from 'react'
 import { useDashboardStore } from '../store/dashboardStore'
 import './Sidebar.css'
 
 export default function Sidebar() {
   const { plugins, addPlugin, removePlugin, addWidget, isEditing } = useDashboardStore()
+  
+  // Счётчик для автоматического размещения виджетов
+  const widgetCounter = useRef(0)
   
   const handleAddPlugin = async () => {
     const url = prompt('Enter plugin manifest URL:')
@@ -16,15 +20,20 @@ export default function Sidebar() {
   }
 
   const handleAddWidget = async (pluginId: string, widgetId: string) => {
+    // Вычисляем позицию для нового виджета (шахматный порядок)
+    const col = widgetCounter.current % 6
+    const row = Math.floor(widgetCounter.current / 6)
+    
     const layout = {
       i: `${pluginId}-${widgetId}-${Date.now()}`,
-      x: 0,
-      y: 0,
+      x: col * 2,
+      y: row * 4,
       w: 4,
       h: 4,
       minW: 2,
       minH: 2,
     }
+    widgetCounter.current++
     
     try {
       await addWidget(pluginId, widgetId, layout)
