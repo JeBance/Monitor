@@ -10,8 +10,21 @@ interface WidgetSettingsProps {
 
 export default function WidgetSettings({ widget, onClose }: WidgetSettingsProps) {
   const { updateWidgetSettings, removeWidget, refreshWidget } = useDashboardStore()
-  const [settings, setSettings] = useState<Record<string, unknown>>(widget.settings)
+  const [settings, setSettings] = useState<Record<string, unknown>>(widget.settings || {})
   const [isSaving, setIsSaving] = useState(false)
+
+  // Проверка на случай если конфиг не загрузился
+  if (!widget.config) {
+    return (
+      <div className="widget-settings-overlay" onClick={onClose}>
+        <div className="widget-settings" onClick={(e) => e.stopPropagation()}>
+          <div className="widget-settings-content">
+            <p className="error-message">⚠ Config not loaded</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   const settingsSchema = widget.config.settingsSchema
 
