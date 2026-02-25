@@ -3,6 +3,12 @@ import { persist } from 'zustand/middleware'
 import { DashboardWidget, WidgetLayout, DashboardState, PluginManifest } from '../types'
 import { loadPluginManifest, loadWidgetConfig, fetchWidgetData } from '../core'
 
+// Расширенный тип плагина с baseUrl
+export interface PluginWithBase extends PluginManifest {
+  baseUrl: string
+  manifestUrl: string
+}
+
 interface DashboardActions {
   // Плагины
   addPlugin: (manifestUrl: string) => Promise<void>
@@ -21,11 +27,6 @@ interface DashboardActions {
   exportState: () => string
   importState: (json: string) => Promise<void>
   toggleEditMode: () => void
-}
-
-// Расширенный тип плагина с baseUrl
-interface PluginWithBase extends PluginManifest {
-  baseUrl: string
 }
 
 const initialState: DashboardState = {
@@ -54,9 +55,9 @@ export const useDashboardStore = create<DashboardState & DashboardActions>()(
         // Вычисляем базовый URL для загрузки конфигов
         const baseUrl = manifestUrl.substring(0, manifestUrl.lastIndexOf('/') + 1)
 
-        // Добавляем плагин с baseUrl
+        // Добавляем плагин с baseUrl и manifestUrl
         set(state => ({
-          plugins: [...state.plugins, { ...manifest, baseUrl } as PluginWithBase],
+          plugins: [...state.plugins, { ...manifest, baseUrl, manifestUrl } as PluginWithBase],
         }))
       },
 
@@ -216,7 +217,10 @@ export const useDashboardStore = create<DashboardState & DashboardActions>()(
     {
       name: 'monitor-dashboard',
       partialize: (state) => ({
-        plugins: state.plugins,
+        plugins: state.plugins.map(p => ({
+          ...p,
+          manifestUrl: (p as PluginWithBase).manifestUrl,
+        })),
         widgets: state.widgets.map(({ id, pluginId, widgetId, settings, layout }) => ({
           id,
           pluginId,
@@ -226,6 +230,20 @@ export const useDashboardStore = create<DashboardState & DashboardActions>()(
         })),
         layouts: state.layouts,
       }),
+      merge: (persistedState, currentState) => {
+        const state = persistedState as Partial<DashboardState>
+        // Восстанавливаем baseUrl для плагинов
+        if (state.plugins) {
+          state.plugins = state.plugins.map(p => {
+            const plugin = p as PluginWithBase
+            if (plugin.manifestUrl && !plugin.baseUrl) {
+              plugin.baseUrl = plugin.manifestUrl.substring(0, plugin.manifestUrl.lastIndexOf('/') + 1)
+            }
+            return plugin
+          })
+        }
+        return { ...currentState, ...state }
+      },
     }
   )
 )
