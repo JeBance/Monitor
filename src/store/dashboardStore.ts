@@ -87,12 +87,23 @@ export const useDashboardStore = create<DashboardState & DashboardActions>()(
           plugin.baseUrl
         )
 
+        // Извлекаем настройки по умолчанию из settingsSchema
+        const defaultSettings: Record<string, unknown> = {}
+        if (config.settingsSchema?.properties) {
+          const props = config.settingsSchema.properties as Record<string, { default?: unknown }>
+          for (const [key, prop] of Object.entries(props)) {
+            if (prop.default !== undefined) {
+              defaultSettings[key] = prop.default
+            }
+          }
+        }
+
         const newWidget: DashboardWidget = {
           id: `${pluginId}-${widgetId}-${Date.now()}`,
           pluginId,
           widgetId,
           config,
-          settings: {},
+          settings: defaultSettings,
           data: null,
           lastUpdate: null,
           error: null,
@@ -104,9 +115,9 @@ export const useDashboardStore = create<DashboardState & DashboardActions>()(
           layouts: [...state.layouts, layout],
         }))
 
-        // Первичная загрузка данных
+        // Первичная загрузка данных с настройками по умолчанию
         try {
-          const data = await fetchWidgetData(config, {})
+          const data = await fetchWidgetData(config, defaultSettings)
           set(state => ({
             widgets: state.widgets.map(w => 
               w.id === newWidget.id 
